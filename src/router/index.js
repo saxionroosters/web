@@ -21,7 +21,7 @@ export default new Router({
 	    },
 	    {
 	      path: '/group/:group/:week',
-	      name: 'Group',
+	      name: 'GroupWeek',
 	      component: Group
 	    },
 	    {
@@ -31,7 +31,7 @@ export default new Router({
 	    },
 	    {
 	      path: '/teacher/:teacher/:week',
-	      name: 'Teacher',
+	      name: 'TeacherWeek',
 	      component: Teacher
 	    }
 	  ]

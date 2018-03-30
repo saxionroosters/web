@@ -1,6 +1,16 @@
 <template>
   <div class="container">
-    <h1 class="title">{{ group[0].name }}<span>{{ group[0].course_name }}</span></h1>
+    <h1 class="title" v-if="group[0]">{{ group[0].name }}
+      <span class="subtitle">{{ group[0].course_name }}</span>
+      <span class="navigation">
+        <button v-on:click="getSchedule(group[0].name, currentWeek - 1)" type="button" class="btn btn-success bmd-btn-icon">
+          <i class="material-icons">chevron_left</i>
+        </button>
+        <button v-on:click="getSchedule(group[0].name, currentWeek + 1)" type="button" class="btn btn-success bmd-btn-icon">
+          <i class="material-icons">chevron_right</i>
+        </button>
+      </span>
+    </h1>
 
     <div class="card day-card" v-for="day in schedule">
       <div class="card-body">
@@ -32,7 +42,8 @@ export default {
   data: function() {
     return {
         schedule: [],
-        group: []
+        group: [],
+        currentWeek: 0
     }
   },
 
@@ -56,6 +67,9 @@ export default {
 
   methods: {
     getSchedule: function(group, week) {
+      this.currentWeek = week;
+      this.schedule = [];
+
       console.log("Getting schedule");
       $.ajax({
         method: 'GET',
@@ -89,11 +103,15 @@ h1.title {
   font-weight: bold;
   margin-bottom: 20px;
 }
-h1.title span {
+h1.title span.subtitle {
   font-weight: normal;
   font-size: 26px;
   color: #737373;
   margin-left: 15px;
+}
+
+h1.title span.navigation {
+  float: right;
 }
 ul {
   list-style-type: none;
