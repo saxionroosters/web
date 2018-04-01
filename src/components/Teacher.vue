@@ -6,6 +6,7 @@
         <button v-on:click="getSchedule(teacher[0].code, currentWeek - 1)" type="button" class="btn btn-success bmd-btn-icon">
           <i class="material-icons">chevron_left</i>
         </button>
+        <span class="week" v-if="week[0]">Week {{ week[0].week }} </span>
         <button v-on:click="getSchedule(teacher[0].code, currentWeek + 1)" type="button" class="btn btn-success bmd-btn-icon">
           <i class="material-icons">chevron_right</i>
         </button>
@@ -43,6 +44,7 @@ export default {
     return {
         schedule: [],
         teacher: [],
+        week: [],
         currentWeek: 0
     }
   },
@@ -68,7 +70,6 @@ export default {
   methods: {
     getSchedule: function(teacher, week) {
       this.currentWeek = week;
-      this.schedule = [];
 
       console.log("Getting schedule");
       $.ajax({
@@ -81,6 +82,7 @@ export default {
         } else {
           var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
+          this.schedule = [];
           for (var i = 0; i < response.days.length; i++) {
             response.days[i].date.date = new Date(response.days[i].date.date).toLocaleDateString("nl-NL", options);
 
@@ -106,9 +108,10 @@ export default {
             }
 
             this.schedule.push(response.days[i]);
-            // console.log(response.days[i]);
           }
           this.teacher.push(response.subject.teacher);
+          this.week = [];
+          this.week.push(response.week);
         }
       }).catch(function (err) {
         console.error(err);
@@ -122,10 +125,12 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
+
 h1.title {
   font-weight: bold;
   margin-bottom: 20px;
 }
+
 h1.title span.subtitle {
   font-weight: normal;
   font-size: 26px;
@@ -133,52 +138,80 @@ h1.title span.subtitle {
   margin-left: 15px;
 }
 
+@media only screen and (max-width: 767px) {
+  h1.title span.subtitle {
+    display: none;
+  }
+}
+
 h1.title span.navigation {
   float: right;
 }
+
+h1.title span.navigation button {
+  margin-top: 9px;
+}
+
+h1.title span.navigation span.week {
+  font-size: 16px;
+  padding-right: 5px;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }
+
 div.container {
   margin-top: 20px;
 }
+
 tr {
   width: 100%;
 }
+
 td {
   border: none;
   padding-top: 10px;
   padding-bottom: 0px;
 }
+
 table {
   border-top: 2px solid #f3f3f3;
   margin-bottom: 10px;
 }
+
 .day-card {
   margin-bottom: 15px;
 }
+
 .day-card h4 {
   margin-bottom: 20px;
 }
+
 .entry-time {
   width: 120px;
   font-weight: 600;
 }
+
 .entry-room {
   float: right;
   font-weight: 600;
 }
+
 .entry-note {
   font-style: italic;
 }
+
 .entry-teacher {
   font-style: normal;
   float: right;
