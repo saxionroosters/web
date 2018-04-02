@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar navbar-dark navbar-expand-md" style="background-color: #4CAF50;">
       <div class="container">
-      <router-link class="navbar-brand" to="/">Roosters</router-link>
+      <router-link class="navbar-brand" v-bind:to="{ name: 'Home' }">Roosters</router-link>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,13 +11,13 @@
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Home</router-link>
+            <router-link class="nav-link" v-bind:to="{ name: 'Home' }">Home</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" v-bind:to="{ name: 'Groups' }">Klassen</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Docenten</router-link>
+            <router-link class="nav-link" v-bind:to="{ name: 'Teachers' }">Docenten</router-link>
           </li>
         </ul>
       </div>

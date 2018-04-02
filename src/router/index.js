@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Group from '@/components/Group'
 import Groups from '@/components/Groups'
 import Teacher from '@/components/Teacher'
+import Teachers from '@/components/Teachers'
 
 Vue.use(Router)
 
@@ -26,16 +27,6 @@ export default new Router({
 	      component: Group
 	    },
 	    {
-	      path: '/teacher/:teacher',
-	      name: 'Teacher',
-	      component: Teacher
-	    },
-	    {
-	      path: '/teacher/:teacher/:week',
-	      name: 'TeacherWeek',
-	      component: Teacher
-	    },
-	    {
 	      path: '/groups/',
 	      name: 'Groups',
 	      component: Groups
@@ -49,6 +40,26 @@ export default new Router({
 	      path: '/groups/:academy/:course',
 	      name: 'GroupsAcademyCourse',
 	      component: Groups
+	    },
+	    {
+	      path: '/teacher/:teacher',
+	      name: 'Teacher',
+	      component: Teacher
+	    },
+	    {
+	      path: '/teacher/:teacher/:week',
+	      name: 'TeacherWeek',
+	      component: Teacher
+	    },
+	    {
+	      path: '/teachers/',
+	      name: 'Teachers',
+	      component: Teachers
+	    },
+	    {
+	      path: '/teachers/:academy',
+	      name: 'TeachersAcademy',
+	      component: Teachers
 	    }
 	  ]
 })

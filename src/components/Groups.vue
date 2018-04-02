@@ -153,19 +153,6 @@ h1.title span.subtitle {
   }
 }
 
-h1.title span.navigation {
-  float: right;
-}
-
-h1.title span.navigation button {
-  margin-top: 9px;
-}
-
-h1.title span.navigation span.week {
-  font-size: 16px;
-  padding-right: 5px;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -197,32 +184,5 @@ td a {
 
 td a:hover {
   text-decoration: none;
-}
-
-.day-card {
-  margin-bottom: 15px;
-}
-
-.day-card h4 {
-  margin-bottom: 20px;
-}
-
-.entry-time {
-  width: 120px;
-  font-weight: 600;
-}
-
-.entry-room {
-  float: right;
-  font-weight: 600;
-}
-
-.entry-note {
-  font-style: italic;
-}
-
-.entry-teacher {
-  font-style: normal;
-  float: right;
 }
 </style>
