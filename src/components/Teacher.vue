@@ -138,12 +138,6 @@ h1.title span.subtitle {
   margin-left: 15px;
 }
 
-@media only screen and (max-width: 767px) {
-  h1.title span.subtitle {
-    display: none;
-  }
-}
-
 h1.title span.navigation {
   float: right;
 }
@@ -215,5 +209,21 @@ table {
 .entry-teacher {
   font-style: normal;
   float: right;
+}
+
+@media only screen and (max-width: 767px) {
+  h1.title {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  h1.title span.subtitle {
+    display: none;
+  }
+
+  .container {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
 }
 </style>
