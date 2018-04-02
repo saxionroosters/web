@@ -24,17 +24,52 @@
             <tbody>
                 <tr class="entry-row-1">
                   <td rowspan="3" class="entry-time"> {{ entry.start }} - {{ entry.end }} </td>
-                  <td colspan="4" class="entry-name"> {{ entry.name }} <span class="entry-room"><a v-bind:href="'#'" v-if="entry.rooms.length"> {{ entry.rooms.length }} lokalen</a><span v-if="!entry.rooms.length"> {{ entry.room }} </span></span></td>
+                  <td colspan="4" class="entry-name"> {{ entry.name }} <span class="entry-room"><a v-if="entry.rooms.length" data-toggle="collapse" v-bind:href="'#rooms-' + entry.date + entry.start + entry.end"> {{ entry.rooms.length }} lokalen</a><span v-if="!entry.rooms.length"> {{ entry.room }} </span></span>
+                  </td>
+                </tr>
+                <tr v-if="entry.rooms.length" class="collapse" v-bind:id="'rooms-' + entry.date + entry.start + entry.end">
+                  <td colspan="4">
+                    <span class="entry-room" v-for="room in entry.rooms"> {{ room }}</span> 
+                  </td>
                 </tr>
                 <tr class="entry-row-2">
-                  <td colspan="4" class="entry-note"> {{ entry.note }} <span class="entry-teacher" v-if="entry.teachers.length"><a v-bind:href="'#'"> {{ entry.teachers.length }} docenten</a></span></td>
+                  <td colspan="4" class="entry-note"> {{ entry.note }} <span class="entry-teacher" v-if="entry.teachers.length"><a data-toggle="collapse" v-bind:href="'#teachers-' + entry.date + entry.start + entry.end"> {{ entry.teachers.length }} docenten</a></span></td>
+                </tr>
+                <tr v-if="entry.teachers.length" class="collapse" v-bind:id="'teachers-' + entry.date + entry.start + entry.end">
+                  <td colspan="4">
+                    <span class="entry-teacher" v-for="teacher in entry.teachers"> {{ teacher }}</span> 
+                  </td>
                 </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+
+    <div v-for="day in schedule">
+  <div v-for="entry in day.entries" class="modal fade" v-bind:id="entry.code" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"> {{ entry.name }} </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
   </div>
+  </div>
+
+  </div>
+
 </template>
 
 <script>
@@ -109,6 +144,8 @@ export default {
 
             this.schedule.push(response.days[i]);
           }
+          console.log(this.schedule);
+
           this.teacher.push(response.subject.teacher);
           this.week = [];
           this.week.push(response.week);
@@ -202,6 +239,14 @@ table {
   font-weight: 600;
 }
 
+.collapse .entry-room {
+  margin-left: 7px;
+}
+
+.collapsing .entry-room {
+  margin-left: 7px;
+}
+
 .entry-note {
   font-style: italic;
 }
@@ -209,6 +254,14 @@ table {
 .entry-teacher {
   font-style: normal;
   float: right;
+}
+
+.collapse .entry-teacher {
+  margin-left: 7px;
+}
+
+.collapsing .entry-teacher {
+  margin-left: 7px;
 }
 
 @media only screen and (max-width: 767px) {
