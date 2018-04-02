@@ -11,14 +11,14 @@ This project is online available at [saxionroosters.nl](http://saxionroosters.nl
 
 ``` bash
 # clone the project
-git clone https://github.com/wesselperik/saxionroosters
+$ git clone https://github.com/wesselperik/saxionroosters
 
 # install dependencies
-npm install
+$ npm install
 
 # serve with hot reload at localhost:8080 for development
-npm run dev
+$ npm run dev
 
 # build for production
-npm run build
+$ npm run build
 ```
