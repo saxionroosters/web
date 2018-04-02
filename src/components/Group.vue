@@ -74,7 +74,7 @@ export default {
       console.log("Getting schedule");
       $.ajax({
         method: 'GET',
-        dataType: 'json',
+        dataType: 'jsonp',
         url: 'http://api.roosters.saxion.nl/v2/groups/schedule.json?group=' + group + '&week=' + week
       }).then((response) => {
         if(response.error) {

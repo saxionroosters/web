@@ -14,7 +14,7 @@
             <router-link class="nav-link" to="/">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Klassen</router-link>
+            <router-link class="nav-link" v-bind:to="{ name: 'Groups' }">Klassen</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/">Docenten</router-link>

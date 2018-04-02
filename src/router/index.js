@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Group from '@/components/Group'
+import Groups from '@/components/Groups'
 import Teacher from '@/components/Teacher'
 
 Vue.use(Router)
@@ -33,6 +34,21 @@ export default new Router({
 	      path: '/teacher/:teacher/:week',
 	      name: 'TeacherWeek',
 	      component: Teacher
+	    },
+	    {
+	      path: '/groups/',
+	      name: 'Groups',
+	      component: Groups
+	    },
+	    {
+	      path: '/groups/:academy',
+	      name: 'GroupsAcademy',
+	      component: Groups
+	    },
+	    {
+	      path: '/groups/:academy/:course',
+	      name: 'GroupsAcademyCourse',
+	      component: Groups
 	    }
 	  ]
 })
