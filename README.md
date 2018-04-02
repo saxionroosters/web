@@ -1,21 +1,20 @@
 # saxionroosters
 
-> Saxion Roosters
+An alternative website for [roosters.saxion.nl](http://roosters.saxion.nl/), built with [Vue.js](https://vuejs.org/).
+This project is online available at [saxionroosters.nl](http://saxionroosters.nl/).
 
 ## Build Setup
 
 ``` bash
+# clone the project
+git clone https://github.com/wesselperik/saxionroosters
+
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8080 for development
 npm run dev
 
-# build for production with minification
+# build for production
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
