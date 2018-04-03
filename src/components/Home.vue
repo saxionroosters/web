@@ -1,41 +1,56 @@
 <template>
   <div class="container home">
+    <h1 class="title">Home</h1>
     <div class="card">
-      <input class="search form-control" type="text" v-model="search" v-on:input="executeSearch(search)" placeholder="Zoek op klas, docent, opleiding of studentnummer..."/>
+      <input class="search form-control" type="text" v-model="search" v-on:input="executeSearch(search)" placeholder="Zoek op klas, docent, opleiding, academie of studentnummer..."/>
 
-      <table class="table">
-          <tbody>
-            <tr v-for="course in filteredCourses">
-              <td> {{ course.name }} </td>
-            </tr>
+      <h4 v-if="filteredGroups.length" class="table-title">Klassen</h4>
+      <table v-if="filteredGroups.length" class="table table-hover">
+        <tbody>
+          <tr class="empty-row">&nbsp;</tr>
+          <tr v-for="group in filteredGroups">
+            <td><router-link v-bind:to="{ name: 'Group', params: { group: group.name }}"> {{ group.name }} </router-link></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 v-if="filteredCourses.length" class="table-title">Opleidingen</h4>
+      <table v-if="filteredCourses.length" class="table table-hover">
+        <tbody>
+          <tr class="empty-row">&nbsp;</tr>
+          <tr v-for="course in filteredCourses">
+            <td><router-link v-bind:to="{ name: 'GroupsAcademyCourse', params: { academy: course.academy, course: course.id }}"> {{ course.name }} </router-link></td>
+          </tr>
           </tbody>
-        </table>
-        <hr>
-        <table class="table">
-          <tbody>
-            <tr v-for="student in filteredStudents">
-              <td> {{ student.student }} </td>
-            </tr>
-          </tbody>
-        </table>
-        <hr>
-        <table class="table">
-          <tbody>
-            <tr v-for="teacher in filteredTeachers">
-              <td> {{ teacher.fullname }} </td>
-            </tr>
-          </tbody>
-        </table>
-        <hr>
-        <table class="table">
-          <tbody>
-            <tr v-for="academy in filteredAcademies">
-              <td> {{ academy.name }} </td>
-            </tr>
-          </tbody>
-        </table>
+      </table>
+      <h4 v-if="filteredStudents.length" class="table-title">Studenten</h4>
+      <table v-if="filteredStudents.length" class="table table-hover">
+        <tbody>
+          <tr class="empty-row">&nbsp;</tr>
+          <tr v-for="student in filteredStudents">
+            <td><router-link v-bind:to="{ name: 'Group', params: { group: student.group }}"><b> {{ student.student }} </b> - {{ student.group }} </router-link></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 v-if="filteredTeachers.length" class="table-title">Docenten</h4>
+      <table v-if="filteredTeachers.length" class="table table-hover">
+        <tbody>
+          <tr class="empty-row">&nbsp;</tr>
+          <tr v-for="teacher in filteredTeachers">
+            <td><router-link v-bind:to="{ name: 'Teacher', params: { teacher: teacher.code }}"><b> {{ teacher.code }} </b> - {{ teacher.fullname }} </router-link></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 v-if="filteredAcademies.length" class="table-title">Academies</h4>
+      <table v-if="filteredAcademies.length" class="table table-hover">
+        <tbody>
+          <tr class="empty-row">&nbsp;</tr>
+          <tr v-for="academy in filteredAcademies">
+            <td><router-link v-bind:to="{ name: 'GroupsAcademy', params: { academy: academy.code }}"><b> {{ academy.code }} </b> - {{ academy.name }} </router-link></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
   </div>
 </template>
 
@@ -45,6 +60,7 @@ export default {
   data: function() {
     return {
         search: '',
+        groups: [],
         courses: [],
         students: [],
         teachers: [],
@@ -57,6 +73,11 @@ export default {
   },
 
   computed: {
+    filteredGroups() {
+      return this.groups.filter(group => {
+        return group.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    },
     filteredCourses() {
       return this.courses.filter(course => {
         return course.name.toLowerCase().includes(this.search.toLowerCase())
@@ -69,20 +90,19 @@ export default {
     },
     filteredTeachers() {
       return this.teachers.filter(teacher => {
-        return teacher.fullname.toLowerCase().includes(this.search.toLowerCase())
+        return teacher.fullname.toLowerCase().includes(this.search.toLowerCase()) || teacher.name.toLowerCase().includes(this.search.toLowerCase()) || teacher.code.toLowerCase().includes(this.search.toLowerCase())
       })
     },
     filteredAcademies() {
       return this.academies.filter(academy => {
-        return academy.name.toLowerCase().includes(this.search.toLowerCase())
+        return academy.name.toLowerCase().includes(this.search.toLowerCase()) || academy.code.toLowerCase().includes(this.search.toLowerCase())
       })
     }
   },
 
   methods: {
     executeSearch: function(query) {
-      console.log("Searching");
-      if (query.length > 2) {
+      if (query.length > 1) {
         $.ajax({
           method: 'GET',
           dataType: 'jsonp',
@@ -91,6 +111,11 @@ export default {
           if(response.error) {
             console.err("There was an error " + response.error);
           } else {
+            this.groups = [];
+            for (var i = 0; i < response.result.groups.length; i++) {
+              this.groups.push(response.result.groups[i]);
+            }
+
             this.courses = [];
             for (var i = 0; i < response.result.courses.length; i++) {
               this.courses.push(response.result.courses[i]);
@@ -115,6 +140,7 @@ export default {
           console.error(err);
         });
       } else {
+        this.groups = [];
         this.courses = [];
         this.students = [];
         this.teachers = [];
@@ -142,17 +168,8 @@ h1.title span.subtitle {
   margin-left: 15px;
 }
 
-h1.title span.navigation {
-  float: right;
-}
-
-h1.title span.navigation button {
-  margin-top: 9px;
-}
-
-h1.title span.navigation span.week {
-  font-size: 16px;
-  padding-right: 5px;
+h4.table-title {
+  font-weight: 600;
 }
 
 ul {
@@ -173,24 +190,32 @@ div.container {
   margin-top: 20px;
 }
 
-tr {
-  width: 100%;
+div.card {
+  padding: 20px;
+}
+
+tr.empty-row {
+  height: 0px !important;
+  font-size: 0px !important;
 }
 
 td {
-  border: none;
-  padding-top: 10px;
-  padding-bottom: 0px;
-  min-width: 100%;
+  font-size: 18px;
+  padding: 0px;
 }
 
-table {
-  border-top: 2px solid #f3f3f3;
-  margin-bottom: 10px;
+td a {
+  color: inherit;
+  display: block;
+  padding: .75rem;
 }
 
-.card {
-  padding: 20px;
+td a:hover {
+  text-decoration: none;
+}
+
+input.search {
+  margin-bottom: 30px;
 }
 
 @media only screen and (max-width: 767px) {
