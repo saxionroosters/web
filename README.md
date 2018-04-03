@@ -24,3 +24,7 @@ $ npm run dev
 # build for production
 $ npm run build
 ```
+
+## Download
+
+Download the latest successful build [here](http://jenkins.perik.me/job/saxionroosters/lastSuccessfulBuild/artifact/dist.tar.gz).
