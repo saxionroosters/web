@@ -45,6 +45,9 @@ export default {
       this.getAcademies();
     } else if (this.$route.params.course === undefined) {
       this.getCourses(this.$route.params.academy);
+      if (this.selectedAcademy === "") {
+        this.getSelectedAcademy(this.$route.params.academy);
+      }
     } else {
       this.getGroups(this.$route.params.course);
     }
@@ -56,6 +59,9 @@ export default {
         this.getAcademies();
       } else if (this.$route.params.course === undefined) {
         this.getCourses(this.$route.params.academy);
+        if (this.selectedAcademy === "") {
+          this.getSelectedAcademy(this.$route.params.academy);
+        }
       } else {
         this.getGroups(this.$route.params.course);
       }
@@ -63,6 +69,26 @@ export default {
   },
 
   methods: {
+    getSelectedAcademy: function(academy) {
+      console.log("Getting selected academy");
+      $.ajax({
+        method: 'GET',
+        dataType: 'jsonp',
+        url: 'http://api.roosters.saxion.nl/v2/academies/list.json'
+      }).then((response) => {
+        if(response.error) {
+          console.err("There was an error " + response.error);
+        } else {
+          for (var i = 0; i < response.academies.length; i++) {
+            if (response.academies[i].code === academy) {
+              this.selectedAcademy = response.academies[i].name;
+            }
+          }
+        }
+      }).catch(function (err) {
+        console.error(err);
+      });
+    },
     getAcademies: function() {
       console.log("Getting academies");
       $.ajax({
@@ -120,6 +146,10 @@ export default {
           this.groups = [];
           for (var i = 0; i < response.groups.length; i++) {
             this.groups.push(response.groups[i]);
+          }
+
+          if (this.selectedCourse === "") {
+            this.selectedCourse = this.groups[0].course_name;
           }
         }
       }).catch(function (err) {
