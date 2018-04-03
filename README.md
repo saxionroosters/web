@@ -1,5 +1,6 @@
 # saxionroosters
 
+[![Build Status](http://jenkins.perik.me/job/saxionroosters/badge/icon)](http://jenkins.perik.me/job/saxionroosters/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wesselperik/saxionroosters/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/wesselperik/saxionroosters.svg)](https://github.com/wesselperik/saxionroosters/issues?q=is%3Aopen+is%3Aissue)
 [![GitHub last commit](https://img.shields.io/github/last-commit/wesselperik/saxionroosters.svg)](https://github.com/wesselperik/saxionroosters/commits)
