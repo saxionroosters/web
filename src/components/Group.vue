@@ -27,7 +27,8 @@
                   <td colspan="4" class="entry-name"> {{ entry.name }} <span class="entry-room"> {{ entry.room }} </span></td>
                 </tr>
                 <tr class="entry-row-2">
-                  <td colspan="4" class="entry-note"> {{ entry.note }} <span class="entry-teacher"><a v-bind:href="'/teacher/' + entry.teachers"> {{ entry.teachername }} </a></span></td>
+                  <td colspan="4" class="entry-note"> {{ entry.note }} <span class="entry-teacher"><router-link v-bind:to="{ name: 'Teacher', params: { teacher: entry.teachers }}"> {{ entry.teachername }} </router-link></span>
+                  </td>
                 </tr>
             </tbody>
           </table>
