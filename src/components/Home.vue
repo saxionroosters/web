@@ -1,9 +1,39 @@
 <template>
   <div class="container home">
     <div class="card">
-      <router-link v-bind:to="{ name: 'Groups' }">Ga naar klassenoverzicht</router-link>
-      <br>
-      <router-link v-bind:to="{ name: 'Teachers' }">Ga naar docentenoverzicht</router-link>
+      <input class="search form-control" type="text" v-model="search" v-on:input="executeSearch(search)" placeholder="Zoek op klas, docent, opleiding of studentnummer..."/>
+
+      <table class="table">
+          <tbody>
+            <tr v-for="course in filteredCourses">
+              <td> {{ course.name }} </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <table class="table">
+          <tbody>
+            <tr v-for="student in filteredStudents">
+              <td> {{ student.student }} </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <table class="table">
+          <tbody>
+            <tr v-for="teacher in filteredTeachers">
+              <td> {{ teacher.fullname }} </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <table class="table">
+          <tbody>
+            <tr v-for="academy in filteredAcademies">
+              <td> {{ academy.name }} </td>
+            </tr>
+          </tbody>
+        </table>
     </div>
 
   </div>
@@ -11,7 +41,87 @@
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  data: function() {
+    return {
+        search: '',
+        courses: [],
+        students: [],
+        teachers: [],
+        academies: []
+    }
+  },
+
+  mounted: function () {
+      this.executeSearch(this.search.toLowerCase());
+  },
+
+  computed: {
+    filteredCourses() {
+      return this.courses.filter(course => {
+        return course.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    },
+    filteredStudents() {
+      return this.students.filter(student => {
+        return student.student.toLowerCase().includes(this.search.toLowerCase())
+      })
+    },
+    filteredTeachers() {
+      return this.teachers.filter(teacher => {
+        return teacher.fullname.toLowerCase().includes(this.search.toLowerCase())
+      })
+    },
+    filteredAcademies() {
+      return this.academies.filter(academy => {
+        return academy.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
+  },
+
+  methods: {
+    executeSearch: function(query) {
+      console.log("Searching");
+      if (query.length > 2) {
+        $.ajax({
+          method: 'GET',
+          dataType: 'jsonp',
+          url: 'http://api.roosters.saxion.nl/v2/search.json?q=' + query
+        }).then((response) => {
+          if(response.error) {
+            console.err("There was an error " + response.error);
+          } else {
+            this.courses = [];
+            for (var i = 0; i < response.result.courses.length; i++) {
+              this.courses.push(response.result.courses[i]);
+            }
+
+            this.students = [];
+            for (var i = 0; i < response.result.students.length; i++) {
+              this.students.push(response.result.students[i]);
+            }
+
+            this.teachers = [];
+            for (var i = 0; i < response.result.teachers.length; i++) {
+              this.teachers.push(response.result.teachers[i]);
+            }
+
+            this.academies = [];
+            for (var i = 0; i < response.result.academies.length; i++) {
+              this.academies.push(response.result.academies[i]);
+            }
+          }
+        }).catch(function (err) {
+          console.error(err);
+        });
+      } else {
+        this.courses = [];
+        this.students = [];
+        this.teachers = [];
+        this.academies = [];
+      }
+    }
+  }
 }
 </script>
 
@@ -71,6 +181,7 @@ td {
   border: none;
   padding-top: 10px;
   padding-bottom: 0px;
+  min-width: 100%;
 }
 
 table {
@@ -78,31 +189,8 @@ table {
   margin-bottom: 10px;
 }
 
-.day-card {
-  margin-bottom: 15px;
-}
-
-.day-card h4 {
-  margin-bottom: 20px;
-}
-
-.entry-time {
-  width: 120px;
-  font-weight: 600;
-}
-
-.entry-room {
-  float: right;
-  font-weight: 600;
-}
-
-.entry-note {
-  font-style: italic;
-}
-
-.entry-teacher {
-  font-style: normal;
-  float: right;
+.card {
+  padding: 20px;
 }
 
 @media only screen and (max-width: 767px) {
