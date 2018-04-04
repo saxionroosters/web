@@ -4,12 +4,34 @@
     <div class="card">
       <input class="search form-control" type="text" v-model="search" v-on:input="executeSearch(search)" placeholder="Zoek op klas, docent, opleiding, academie of studentnummer..."/>
 
+      <h4 v-if="search.length < 2" class="table-title recently-viewed">Recent bekeken klassen</h4>
+      <p v-if="search.length < 2 && !recentGroups.length" class="no-recently-viewed">Geen recent bekeken klassen</p>
+      <table v-if="search.length < 2 && recentGroups.length" class="table table-hover">
+        <tbody>
+          <tr class="empty-row">&nbsp;</tr>
+          <tr v-for="recentGroup in recentGroups">
+            <td><router-link v-bind:to="{ name: 'Group', params: { group: recentGroup.name }}"> {{ recentGroup.name }} - <i> {{ recentGroup.course_name }} </i></router-link></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 v-if="search.length < 2" class="table-title recently-viewed">Recent bekeken docenten</h4>
+      <p v-if="search.length < 2 && !recentTeachers.length" class="no-recently-viewed">Geen recent bekeken docenten</p>
+      <table v-if="search.length < 2 && recentTeachers.length" class="table table-hover">
+        <tbody>
+          <tr class="empty-row">&nbsp;</tr>
+          <tr v-for="recentTeacher in recentTeachers">
+            <td><router-link v-bind:to="{ name: 'Teacher', params: { teacher: recentTeacher.code }}"> {{ recentTeacher.code }} - <i> {{ recentTeacher.fullname }} </i></router-link></td>
+          </tr>
+        </tbody>
+      </table>
+
       <h4 v-if="filteredGroups.length" class="table-title">Klassen</h4>
       <table v-if="filteredGroups.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
           <tr v-for="group in filteredGroups">
-            <td><router-link v-bind:to="{ name: 'Group', params: { group: group.name }}"> {{ group.name }} </router-link></td>
+            <td><router-link v-bind:to="{ name: 'Group', params: { group: group.name }}"> {{ group.name }} - <i> {{ group.course_name }} </i> </router-link></td>
           </tr>
         </tbody>
       </table>
@@ -23,30 +45,33 @@
           </tr>
           </tbody>
       </table>
+
       <h4 v-if="filteredStudents.length" class="table-title">Studenten</h4>
       <table v-if="filteredStudents.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
           <tr v-for="student in filteredStudents">
-            <td><router-link v-bind:to="{ name: 'Group', params: { group: student.group }}"><b> {{ student.student }} </b> - {{ student.group }} </router-link></td>
+            <td><router-link v-bind:to="{ name: 'Group', params: { group: student.group }}"> {{ student.student }} - <i> {{ student.group }} </i></router-link></td>
           </tr>
         </tbody>
       </table>
+
       <h4 v-if="filteredTeachers.length" class="table-title">Docenten</h4>
       <table v-if="filteredTeachers.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
           <tr v-for="teacher in filteredTeachers">
-            <td><router-link v-bind:to="{ name: 'Teacher', params: { teacher: teacher.code }}"><b> {{ teacher.code }} </b> - {{ teacher.fullname }} </router-link></td>
+            <td><router-link v-bind:to="{ name: 'Teacher', params: { teacher: teacher.code }}"> {{ teacher.code }} - <i> {{ teacher.fullname }} </i></router-link></td>
           </tr>
         </tbody>
       </table>
+
       <h4 v-if="filteredAcademies.length" class="table-title">Academies</h4>
       <table v-if="filteredAcademies.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
           <tr v-for="academy in filteredAcademies">
-            <td><router-link v-bind:to="{ name: 'GroupsAcademy', params: { academy: academy.code }}"><b> {{ academy.code }} </b> - {{ academy.name }} </router-link></td>
+            <td><router-link v-bind:to="{ name: 'GroupsAcademy', params: { academy: academy.code }}"> {{ academy.code }} - <i> {{ academy.name }} </i></router-link></td>
           </tr>
         </tbody>
       </table>
@@ -64,12 +89,15 @@ export default {
         courses: [],
         students: [],
         teachers: [],
-        academies: []
+        academies: [],
+        recentGroups: [],
+        recentTeachers: []
     }
   },
 
   mounted: function () {
-      this.executeSearch(this.search.toLowerCase());
+    this.readCookies();
+    this.executeSearch(this.search.toLowerCase());
   },
 
   computed: {
@@ -101,6 +129,21 @@ export default {
   },
 
   methods: {
+    readCookies: function() {
+      if (Cookies.getJSON('recentlyViewed') !== undefined) {
+        var cookieJSON = Cookies.getJSON('recentlyViewed');
+
+        this.recentGroups = [];
+        for (var i = 0; i < cookieJSON.groups.length; i++) {
+          this.recentGroups.push(cookieJSON.groups[i]);
+        }
+
+        this.recentTeachers = [];
+        for (var i = 0; i < cookieJSON.teachers.length; i++) {
+          this.recentTeachers.push(cookieJSON.teachers[i]);
+        }
+      }
+    },
     executeSearch: function(query) {
       if (query.length > 1) {
         $.ajax({
@@ -170,6 +213,15 @@ h1.title span.subtitle {
 
 h4.table-title {
   font-weight: 600;
+}
+
+h4.recently-viewed {
+  margin-top: 10px;
+}
+
+p.no-recently-viewed {
+  padding: .75rem;
+  font-size: 18px;
 }
 
 ul {

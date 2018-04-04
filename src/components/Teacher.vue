@@ -149,10 +149,41 @@ export default {
           this.teacher.push(response.subject.teacher);
           this.week = [];
           this.week.push(response.week);
+
+          this.updateCookies();
         }
       }).catch(function (err) {
         console.error(err);
       });
+    },
+    updateCookies() {
+      if (Cookies.getJSON('recentlyViewed') === undefined) {
+        // cookie not created
+        Cookies.set('recentlyViewed', { groups: [], teachers: [] });
+      }
+
+      var cookieJSON = Cookies.getJSON('recentlyViewed');
+      var found = false;
+
+      for(var i = 0; i < cookieJSON.teachers.length; i++) {
+        if (cookieJSON.teachers[i].code === this.teacher[0].code) {
+          // move found teacher to first index
+          var temp = cookieJSON.teachers[i];
+          cookieJSON.teachers.splice(i, 1);
+          cookieJSON.teachers.unshift(temp);
+          Cookies.set('recentlyViewed', cookieJSON);
+          found = true;
+        }
+      }
+
+      if (!found) {
+        // teacher not found, add it to the cookie
+        cookieJSON.teachers.unshift(this.teacher[0]);
+        if (cookieJSON.teachers.length > 5) {
+          cookieJSON.teachers.pop();
+        }
+        Cookies.set('recentlyViewed', cookieJSON);
+      }
     }
   }
 }

@@ -91,10 +91,41 @@ export default {
           this.group.push(response.subject.group);
           this.week = [];
           this.week.push(response.week);
+
+          this.updateCookies();
         }
       }).catch(function (err) {
         console.error(err);
       });
+    },
+    updateCookies() {
+      if (Cookies.getJSON('recentlyViewed') === undefined) {
+        // cookie not created
+        Cookies.set('recentlyViewed', { groups: [], teachers: [] });
+      }
+
+      var cookieJSON = Cookies.getJSON('recentlyViewed');
+      var found = false;
+
+      for(var i = 0; i < cookieJSON.groups.length; i++) {
+        if (cookieJSON.groups[i].name === this.group[0].name) {
+          // move found group to first index
+          var temp = cookieJSON.groups[i];
+          cookieJSON.groups.splice(i, 1);
+          cookieJSON.groups.unshift(temp);
+          Cookies.set('recentlyViewed', cookieJSON);
+          found = true;
+        }
+      }
+
+      if (!found) {
+        // group not found, add it to the cookie
+        cookieJSON.groups.unshift(this.group[0]);
+        if (cookieJSON.groups.length > 5) {
+          cookieJSON.groups.pop();
+        }
+        Cookies.set('recentlyViewed', cookieJSON);
+      }
     }
   }
 }
