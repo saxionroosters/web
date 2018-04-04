@@ -39,6 +39,7 @@
           <li><a href="mailto:info@wesselperik.com">Contacteer ontwikkelaar</a></li>
         </ul>
         <p>&copy; 2018 <a href="https://github.com/wesselperik" target="_blank">Wessel Perik</a>. Code vrijgegeven onder de <a rel="license" href="https://github.com/wesselperik/saxionroosters/blob/master/LICENSE" target="_blank">MIT</a> licentie.</p>
+        <p>De informatie op deze site komt direct vanuit de offici&euml;le <a href="http://api.roosters.saxion.nl/" target="_blank">Saxion Roosters API</a>.<br> Er kunnen geen rechten ontleend worden aan deze informatie.</p>
       </div>
     </footer>
   </div>
@@ -79,7 +80,7 @@ main {
   margin-top: -175px;
   height: 175px;
   clear: both;
-  padding: 4rem 0;
+  padding: 2rem 0;
   font-size: 85%;
   text-align: center;
   background-color: #f7f7f7;
