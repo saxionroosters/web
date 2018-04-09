@@ -19,12 +19,12 @@
         <div class="alert alert-info" role="alert" v-if="day.date.holiday"> {{ day.date.holiday }} </div>
 
         <div class="day">
-          <div class="alert alert-secondary" role="alert" v-if="!day.entries.length && !day.date.holiday">Geen lessen</div>
+          <div class="alert alert-secondary" role="alert" v-if="!day.entries.length && !day.date.holiday"> {{ $t('schedule.no-classes') }} </div>
           <table class="table" v-for="entry in day.entries">
             <tbody>
                 <tr class="entry-row-1">
                   <td rowspan="3" class="entry-time"> {{ entry.start }} - {{ entry.end }} </td>
-                  <td colspan="4" class="entry-name"> {{ entry.name }} <span class="entry-room"><a v-if="entry.rooms.length" data-toggle="collapse" v-bind:href="'#rooms-' + entry.date + entry.start + entry.end"> {{ entry.rooms.length }} lokalen</a><span v-if="!entry.rooms.length"> {{ entry.room }} </span></span>
+                  <td colspan="4" class="entry-name"> {{ entry.name }} <span class="entry-room"><a v-if="entry.rooms.length" data-toggle="collapse" v-bind:href="'#rooms-' + entry.date + entry.start + entry.end"> {{ entry.rooms.length + ' ' + $t('schedule.rooms') }} </a><span v-if="!entry.rooms.length"> {{ entry.room }} </span></span>
                   </td>
                 </tr>
                 <tr v-if="entry.rooms.length" class="collapse" v-bind:id="'rooms-' + entry.date + entry.start + entry.end">
@@ -33,7 +33,7 @@
                   </td>
                 </tr>
                 <tr class="entry-row-2">
-                  <td colspan="4" class="entry-note"> {{ entry.note }} <span class="entry-teacher" v-if="entry.teachers.length"><a data-toggle="collapse" v-bind:href="'#teachers-' + entry.date + entry.start + entry.end"> {{ entry.teachers.length }} docenten</a></span></td>
+                  <td colspan="4" class="entry-note"> {{ entry.note }} <span class="entry-teacher" v-if="entry.teachers.length"><a data-toggle="collapse" v-bind:href="'#teachers-' + entry.date + entry.start + entry.end"> {{ entry.teachers.length + ' ' + $t('schedule.teachers') }} </a></span></td>
                 </tr>
                 <tr v-if="entry.teachers.length" class="collapse" v-bind:id="'teachers-' + entry.date + entry.start + entry.end">
                   <td colspan="4">

@@ -1,11 +1,11 @@
 <template>
   <div class="container home">
-    <h1 class="title">Home</h1>
+    <h1 class="title"> {{ $t('titles.home') }} </h1>
     <div class="card">
-      <input class="search form-control" type="text" v-model="search" v-on:input="executeSearch(search)" placeholder="Zoek op klas, docent, opleiding, academie of studentnummer..."/>
+      <input class="search form-control" type="text" v-model="search" v-on:input="executeSearch(search)" v-bind:placeholder="$t('home.search-hint')"/>
 
-      <h4 v-if="search.length < 2" class="table-title recently-viewed">Recent bekeken klassen</h4>
-      <p v-if="search.length < 2 && !recentGroups.length" class="no-recently-viewed">Geen recent bekeken klassen</p>
+      <h4 v-if="search.length < 2" class="table-title recently-viewed"> {{ $t('home.recent-groups') }} </h4>
+      <p v-if="search.length < 2 && !recentGroups.length" class="no-recently-viewed"> {{ $t('home.no-recent-groups') }} </p>
       <table v-if="search.length < 2 && recentGroups.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
@@ -15,8 +15,8 @@
         </tbody>
       </table>
 
-      <h4 v-if="search.length < 2" class="table-title recently-viewed">Recent bekeken docenten</h4>
-      <p v-if="search.length < 2 && !recentTeachers.length" class="no-recently-viewed">Geen recent bekeken docenten</p>
+      <h4 v-if="search.length < 2" class="table-title recently-viewed"> {{ $t('home.recent-teachers') }} </h4>
+      <p v-if="search.length < 2 && !recentTeachers.length" class="no-recently-viewed"> {{ $t('home.no-recent-teachers') }} </p>
       <table v-if="search.length < 2 && recentTeachers.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>

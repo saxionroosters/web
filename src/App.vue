@@ -3,7 +3,7 @@
     <header>
       <nav class="navbar navbar-dark navbar-expand-md fixed-top" style="background-color: #4CAF50;">
         <div class="container">
-        <router-link class="navbar-brand" v-bind:to="{ name: 'Home' }">Roosters</router-link>
+        <router-link class="navbar-brand" v-bind:to="{ name: 'Home' }"> {{ $t('schedules') }} </router-link>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -12,13 +12,13 @@
         <div class="collapse navbar-collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <router-link class="nav-link" v-bind:to="{ name: 'Home' }">Home</router-link>
+              <router-link class="nav-link" v-bind:to="{ name: 'Home' }"> {{ $t('titles.home') }} </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" v-bind:to="{ name: 'Groups' }">Klassen</router-link>
+              <router-link class="nav-link" v-bind:to="{ name: 'Groups' }"> {{ $tc('titles.group', 2) }} </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" v-bind:to="{ name: 'Teachers' }">Docenten</router-link>
+              <router-link class="nav-link" v-bind:to="{ name: 'Teachers' }"> {{ $tc('titles.teacher', 2) }} </router-link>
             </li>
           </ul>
         </div>
@@ -35,11 +35,12 @@
     <footer class="footer text-muted">
       <div class="container">
         <ul class="footer-links">
-          <li><a href="https://github.com/wesselperik/saxionroosters">Project op GitHub</a></li>
-          <li><a href="mailto:info@wesselperik.com">Contacteer ontwikkelaar</a></li>
+          <li><a v-on:click="changeLanguage" href=""> {{ $t('footer.change-language') }} </a></li>
+          <li v-html="$t('footer.project-github')"></li>
+          <li v-html="$t('footer.contact')"></li>
         </ul>
-        <p>&copy; 2018 <a href="https://github.com/wesselperik" target="_blank">Wessel Perik</a>. Code vrijgegeven onder de <a rel="license" href="https://github.com/wesselperik/saxionroosters/blob/master/LICENSE" target="_blank">MIT</a> licentie.</p>
-        <p>De informatie op deze site komt direct vanuit de offici&euml;le <a href="http://api.roosters.saxion.nl/" target="_blank">Saxion Roosters API</a>.<br> Er kunnen geen rechten ontleend worden aan deze informatie.</p>
+        <p v-html="$t('footer.copyright') + ' ' + $t('footer.license')"></p>
+        <p v-html="$t('footer.disclaimer')"></p>
       </div>
     </footer>
   </div>
@@ -47,7 +48,20 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    changeLanguage: function() {
+      if (Cookies.get('locale') !== undefined) {
+        if (Cookies.get('locale') === "nl") {
+          Cookies.set('locale', 'en');
+        } else {
+          Cookies.set('locale', 'nl');
+        }
+      } else {
+        Cookies.set('locale', 'nl');
+      }
+    }
+  }
 }
 </script>
 

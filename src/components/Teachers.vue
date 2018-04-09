@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <h1 class="title"> Docenten 
-      <span class="subtitle" v-if="academies.length">Kies een academie</span>
+    <h1 class="title"> {{ $tc('titles.teacher', 2) }} 
+      <span class="subtitle" v-if="academies.length"> {{ $t('subtitles.choose-academy') }} </span>
       <span class="subtitle" v-if="teachers.length"> {{ selectedAcademy }} </span>
     </h1>
 
