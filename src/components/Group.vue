@@ -23,12 +23,18 @@
           <table class="table" v-for="entry in day.entries">
             <tbody>
                 <tr class="entry-row-1">
-                  <td rowspan="3" class="entry-time"> {{ entry.start }} - {{ entry.end }} </td>
-                  <td colspan="4" class="entry-name" v-if="locale === 'nl'"> {{ entry.name }} <span class="entry-room"> {{ entry.room }} </span></td>
-                  <td colspan="4" class="entry-name" v-if="locale === 'en'"> {{ entry.name_en }} <span class="entry-room"> {{ entry.room }} </span></td>
+                  <td rowspan="3" class="entry-time"><span>{{ entry.start }}</span><br>{{ entry.end }}</td>
+                  <td colspan="4" class="entry-name" v-if="locale === 'nl'">{{ entry.name }}<span class="entry-room" v-if="entry.room" v-bind:style="'color: ' + entry.building_color"><i class="material-icons">place</i>{{ entry.building }}, {{ entry.room }}</span></td>
+                  <td colspan="4" class="entry-name" v-if="locale === 'en'">{{ entry.name_en }}<span class="entry-room" v-if="entry.room" v-bind:style="'color: ' + entry.building_color"><i class="material-icons">place</i>{{ entry.building }}, {{ entry.room }}</span></td>
                 </tr>
                 <tr class="entry-row-2">
                   <td colspan="4" class="entry-note"> {{ entry.note }} <span class="entry-teacher"><router-link v-bind:to="{ name: 'Teacher', params: { teacher: entry.teachers }}"> {{ entry.teachername }} </router-link></span>
+                  </td>
+                </tr>
+                <tr class="entry-row-3">
+                  <td colspan="4">
+                    <span class="entry-teacher"><router-link v-bind:to="{ name: 'Teacher', params: { teacher: entry.teachers }}"> {{ entry.teachername }} </router-link></span>
+                    <span class="entry-room" v-if="entry.room" v-bind:style="'color: ' + entry.building_color"><i class="material-icons">place</i>{{ entry.room }}</span>
                   </td>
                 </tr>
             </tbody>
@@ -94,6 +100,75 @@ export default {
               localeString = "en-US";
             }
             response.days[i].date.date = new Date(response.days[i].date.date).toLocaleDateString(localeString, options);
+
+            for (var j = 0; j < response.days[i].entries.length; j++) {
+              var building = "";
+              var buildingColor = "";
+
+              if (response.days[i].entries[j].room !== null) {
+                var roomLetter = response.days[i].entries[j].room.charAt(0);
+
+                if (roomLetter === 'F') {
+                  building = "Forum";
+                  buildingColor = "#673AB7";
+                } else if (roomLetter === 'S') {
+                  building = "Schierbeek";
+                  buildingColor = "#3F51B5";
+                } else if (roomLetter === 'W') {
+                  building = "Wolvekamp";
+                  buildingColor = "#2979FF";
+                } else if (roomLetter === 'G') {
+                  building = "Epy Drost";
+                  buildingColor = "#2196F3";
+                } else if (roomLetter === 'H') {
+                  building = "Haanstra";
+                  buildingColor = "#E91E63";
+                } else if (roomLetter === 'E') {
+                  building = "Elderink";
+                  buildingColor = "#9C27B0";
+                } else if (roomLetter === 'R') {
+                  building = "Randstad";
+                  buildingColor = "#4FC3F7";
+                } else if (roomLetter === 'O') {
+                  building = "Stork";
+                  buildingColor = "#E53935";
+                } else if (roomLetter === 'Q') {
+                  building = "Hazemeyer";
+                  buildingColor = "#FF5722";
+                } else if (roomLetter === 'N') {
+                  building = "Ainsworth";
+                  buildingColor = "#FFB300";
+                } else if (roomLetter === 'P') {
+                  building = "Hofstede Crull";
+                  buildingColor = "#FDD835";
+                } else if (roomLetter === 'Z') {
+                  building = "Alphons Ari&euml;s";
+                  buildingColor = "#F8E71C";
+                } else if (roomLetter === 'X') {
+                  building = "Sociale Verzekeringsbank";
+                  buildingColor = "#546E7A";
+                } else if (roomLetter === 'A') {
+                  building = "A-vleugel";
+                  buildingColor = "#009688";
+                } else if (roomLetter === 'B') {
+                  building = "B-vleugel";
+                  buildingColor = "#4CAF50";
+                } else if (roomLetter === 'C') {
+                  building = "C-vleugel";
+                  buildingColor = "#8BC34A";
+                } else if (roomLetter === 'D') {
+                  building = "D-vleugel";
+                  buildingColor = "#CDDC39";
+                } else if (roomLetter === 'K') {
+                  building = "Apeldoorn";
+                  buildingColor = "#FF5722";
+                }
+              }
+
+              response.days[i].entries[j].building = building;
+              response.days[i].entries[j].building_color = buildingColor;
+            }
+
             this.schedule.push(response.days[i]);
           }
           this.group.push(response.subject.group);
@@ -191,6 +266,10 @@ tr {
   width: 100%;
 }
 
+tr.entry-row-3 {
+  display: none;
+}
+
 td {
   border: none;
   padding-top: 10px;
@@ -213,11 +292,33 @@ table {
 .entry-time {
   width: 120px;
   font-weight: 600;
+  font-size: 1.25rem;
+  text-align: center;
+  color: #7b7b7b;
+  padding-top: 10px;
+}
+
+.entry-time span {
+  font-size: 1.4rem;
+  color: #2c3e50;
+}
+
+.entry-name {
+  font-size: 1.1rem;
+  padding-top: 12px;
 }
 
 .entry-room {
   float: right;
   font-weight: 600;
+  font-size: 0.9rem;
+  padding-top: 3px;
+}
+
+.entry-room i {
+  font-size: 1.2rem;
+  vertical-align: top;
+  margin-right: 3px;
 }
 
 .entry-note {
@@ -227,6 +328,10 @@ table {
 .entry-teacher {
   font-style: normal;
   float: right;
+}
+
+.entry-teacher a {
+  color: #7b7b7b;
 }
 
 @media only screen and (max-width: 767px) {
@@ -242,6 +347,30 @@ table {
   .container {
     padding-left: 0px !important;
     padding-right: 0px !important;
+  }
+
+  tr.entry-row-1 .entry-room {
+    display: none;
+  }
+
+  tr.entry-row-1 .entry-time {
+    padding-top: 20px;
+  }
+
+  tr.entry-row-2 .entry-teacher {
+    display: none;
+  }
+
+  tr.entry-row-3 {
+    display: table-row;
+  }
+
+  tr.entry-row-3 .entry-teacher {
+    float: left;
+  }
+
+  tr.entry-row-3 .entry-room {
+    padding-top: 0px;
   }
 }
 </style>
