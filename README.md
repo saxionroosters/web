@@ -1,4 +1,4 @@
-![saxionroosters](http://saxionroosters.nl/static/img/saxionroosters-logo-text-small.png)
+![saxionroosters](http://saxionroosters.nl/static/img/saxionroosters-logo-text-2.png)
 -----
 
 [![Build Status](http://jenkins.perik.me/job/saxionroosters/badge/icon)](http://jenkins.perik.me/job/saxionroosters/)
