@@ -1,4 +1,5 @@
-# saxionroosters
+![saxionroosters](http://saxionroosters.nl/static/img/saxionroosters-logo-text-small.png)
+-----
 
 [![Build Status](http://jenkins.perik.me/job/saxionroosters/badge/icon)](http://jenkins.perik.me/job/saxionroosters/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wesselperik/saxionroosters/blob/master/LICENSE)
