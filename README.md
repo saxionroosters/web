@@ -28,3 +28,9 @@ $ npm run build
 ## Download
 
 Download the latest successful build [here](http://jenkins.perik.me/job/saxionroosters/lastSuccessfulBuild/artifact/dist.tar.gz).
+
+## Project managers
+
+- [Wessel Perik (wesselperik)](https://github.com/wesselperik)
+- [Max Oude Spraakste (Max053)](https://github.com/Max053)
+- [Rutger Nijhuis (BananaPukeh)](https://github.com/BananaPukeh)
