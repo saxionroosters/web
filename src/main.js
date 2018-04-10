@@ -14,6 +14,9 @@ const translations = {
   	  	"home": "Home",
       	"teacher": "Teacher | Teachers",
       	"group": "Group | Groups",
+        "course": "Course | Courses",
+        "student": "Student | Students",
+        "academy": "Academy | Academies",
       	"schedule": "Schedule | Schedules"
   	  },
   	  subtitles: {
@@ -44,9 +47,12 @@ const translations = {
 	  "schedules": "Roosters",
 	  titles: {
 	  	"home": "Home",
-		"teacher": "Docent | Docenten",
-		"group": "Klas | Klassen",
-		"schedule": "Rooster | Roosters"
+		  "teacher": "Docent | Docenten",
+		  "group": "Klas | Klassen",
+      "course": "Opleiding | Opleidingen",
+      "student": "Student | Studenten",
+      "academy": "Academie | Academies",
+		  "schedule": "Rooster | Roosters"
 	  },
 	  subtitles: {
   	  	"choose-academy": "Kies een academie"

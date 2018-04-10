@@ -24,7 +24,9 @@
             <tbody>
                 <tr class="entry-row-1">
                   <td rowspan="3" class="entry-time"> {{ entry.start }} - {{ entry.end }} </td>
-                  <td colspan="4" class="entry-name"> {{ entry.name }} <span class="entry-room"><a v-if="entry.rooms.length" data-toggle="collapse" v-bind:href="'#rooms-' + entry.date + entry.start + entry.end"> {{ entry.rooms.length + ' ' + $t('schedule.rooms') }} </a><span v-if="!entry.rooms.length"> {{ entry.room }} </span></span>
+                  <td colspan="4" class="entry-name" v-if="locale === 'nl'"> {{ entry.name }} <span class="entry-room"><a v-if="entry.rooms.length" data-toggle="collapse" v-bind:href="'#rooms-' + entry.date + entry.start + entry.end"> {{ entry.rooms.length + ' ' + $t('schedule.rooms') }} </a><span v-if="!entry.rooms.length"> {{ entry.room }} </span></span>
+                  </td>
+                  <td colspan="4" class="entry-name" v-if="locale === 'en'"> {{ entry.name_en }} <span class="entry-room"><a v-if="entry.rooms.length" data-toggle="collapse" v-bind:href="'#rooms-' + entry.date + entry.start + entry.end"> {{ entry.rooms.length + ' ' + $t('schedule.rooms') }} </a><span v-if="!entry.rooms.length"> {{ entry.room }} </span></span>
                   </td>
                 </tr>
                 <tr v-if="entry.rooms.length" class="collapse" v-bind:id="'rooms-' + entry.date + entry.start + entry.end">
@@ -80,7 +82,8 @@ export default {
         schedule: [],
         teacher: [],
         week: [],
-        currentWeek: 0
+        currentWeek: 0,
+        locale: Cookies.get('locale')
     }
   },
 
@@ -119,7 +122,13 @@ export default {
 
           this.schedule = [];
           for (var i = 0; i < response.days.length; i++) {
-            response.days[i].date.date = new Date(response.days[i].date.date).toLocaleDateString("nl-NL", options);
+            var localeString = "";
+            if (this.locale === "nl") {
+              localeString = "nl-NL";
+            } else {
+              localeString = "en-US";
+            }
+            response.days[i].date.date = new Date(response.days[i].date.date).toLocaleDateString(localeString, options);
 
             for (var j = 0; j < response.days[i].entries.length; j++) {
               response.days[i].entries[j].teachers = [];

@@ -26,7 +26,7 @@
         </tbody>
       </table>
 
-      <h4 v-if="filteredGroups.length" class="table-title">Klassen</h4>
+      <h4 v-if="filteredGroups.length" class="table-title"> {{ $tc('titles.group', 2) }} </h4>
       <table v-if="filteredGroups.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
@@ -36,7 +36,7 @@
         </tbody>
       </table>
 
-      <h4 v-if="filteredCourses.length" class="table-title">Opleidingen</h4>
+      <h4 v-if="filteredCourses.length" class="table-title"> {{ $tc('titles.course', 2) }} </h4>
       <table v-if="filteredCourses.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
@@ -46,7 +46,7 @@
           </tbody>
       </table>
 
-      <h4 v-if="filteredStudents.length" class="table-title">Studenten</h4>
+      <h4 v-if="filteredStudents.length" class="table-title"> {{ $tc('titles.student', 2) }} </h4>
       <table v-if="filteredStudents.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
@@ -56,7 +56,7 @@
         </tbody>
       </table>
 
-      <h4 v-if="filteredTeachers.length" class="table-title">Docenten</h4>
+      <h4 v-if="filteredTeachers.length" class="table-title"> {{ $tc('titles.teacher', 2) }} </h4>
       <table v-if="filteredTeachers.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>
@@ -66,7 +66,7 @@
         </tbody>
       </table>
 
-      <h4 v-if="filteredAcademies.length" class="table-title">Academies</h4>
+      <h4 v-if="filteredAcademies.length" class="table-title"> {{ $tc('titles.academy', 2) }} </h4>
       <table v-if="filteredAcademies.length" class="table table-hover">
         <tbody>
           <tr class="empty-row">&nbsp;</tr>

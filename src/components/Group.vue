@@ -24,7 +24,8 @@
             <tbody>
                 <tr class="entry-row-1">
                   <td rowspan="3" class="entry-time"> {{ entry.start }} - {{ entry.end }} </td>
-                  <td colspan="4" class="entry-name"> {{ entry.name }} <span class="entry-room"> {{ entry.room }} </span></td>
+                  <td colspan="4" class="entry-name" v-if="locale === 'nl'"> {{ entry.name }} <span class="entry-room"> {{ entry.room }} </span></td>
+                  <td colspan="4" class="entry-name" v-if="locale === 'en'"> {{ entry.name_en }} <span class="entry-room"> {{ entry.room }} </span></td>
                 </tr>
                 <tr class="entry-row-2">
                   <td colspan="4" class="entry-note"> {{ entry.note }} <span class="entry-teacher"><router-link v-bind:to="{ name: 'Teacher', params: { teacher: entry.teachers }}"> {{ entry.teachername }} </router-link></span>
@@ -46,7 +47,8 @@ export default {
         schedule: [],
         group: [],
         week: [],
-        currentWeek: 0
+        currentWeek: 0,
+        locale: Cookies.get('locale')
     }
   },
 
@@ -85,7 +87,13 @@ export default {
 
           this.schedule = [];
           for (var i = 0; i < response.days.length; i++) {
-            response.days[i].date.date = new Date(response.days[i].date.date).toLocaleDateString("nl-NL", options);
+            var localeString = "";
+            if (this.locale === "nl") {
+              localeString = "nl-NL";
+            } else {
+              localeString = "en-US";
+            }
+            response.days[i].date.date = new Date(response.days[i].date.date).toLocaleDateString(localeString, options);
             this.schedule.push(response.days[i]);
           }
           this.group.push(response.subject.group);
