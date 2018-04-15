@@ -33,7 +33,10 @@ const translations = {
   	  	"teachers": "teachers",
   	  	"rooms": "rooms",
   	  	"no-classes": "No classes"
-  	  },
+	  },
+	  drawer_footer: {
+		"change-language": "Taal veranderen"
+	  },
       footer: {
       	"change-language": "Nederlands",
       	"project-github": "<a href='https://github.com/wesselperik/saxionroosters'>Project on GitHub</a>",
@@ -68,7 +71,10 @@ const translations = {
   	  	"teachers": "docenten",
   	  	"rooms": "lokalen",
   	  	"no-classes": "Geen lessen"
-  	  },
+	  },
+	  drawer_footer: {
+		"change-language": "Change language"
+	  },
       footer: {
 	  	"change-language": "English",
       	"project-github": "<a href='https://github.com/wesselperik/saxionroosters'>Project op GitHub</a>",
