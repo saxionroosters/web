@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import VueAnalytics from 'vue-analytics'
 import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
 
 Vue.use(VueI18n)
+Vue.use(VueAnalytics, {
+	id: 'UA-118294891-1',
+	router
+})
 
 const translations = {
   en: {
