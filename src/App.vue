@@ -1,4 +1,113 @@
 <template>
+  <v-app id="app">
+      <v-toolbar
+        color="saxionroosters"
+        dark
+        extended
+        flat
+      >
+        <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+
+        <!-- <v-toolbar-title class="ml-0 pl-3">
+          <span class="hidden-sm-and-down">Saxion Roosters</span>
+        </v-toolbar-title> -->
+        <v-toolbar-title class="white--text">Saxion Roosters</v-toolbar-title>
+        <!-- <v-toolbar-title slot="extension" class="white--text">Title</v-toolbar-title> -->
+
+        <v-spacer class="hidden-sm-and-down"></v-spacer>
+
+        <v-menu :nudge-width="100">
+          <v-toolbar-title slot="activator">
+            <span v-if="selectedItem">{{ selectedItem }}</span>
+            <span v-if="!selectedItem">Schedules</span>
+            <v-icon dark>arrow_drop_down</v-icon>
+          </v-toolbar-title>
+
+          <v-list>
+            <router-link @click="selectedItem = item" tag="v-list-tile" v-bind:to="{ name: 'Group', params: { group: item }}" v-for="item in items" :key="item">
+              <v-list-tile-title v-text="item"></v-list-tile-title>
+            </router-link>
+            <v-divider></v-divider>
+            <router-link @click="selectedItem = ''" tag="v-list-tile" v-bind:to="{ name: 'Home' }">
+              <v-list-tile-title style="font-size: 14px; font-weight: 500; color: #989898;">Manage schedules...</v-list-tile-title>
+            </router-link>
+          </v-list>
+        </v-menu>
+
+        <v-btn icon style="margin-left: 25px;">
+          <v-icon>search</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>settings</v-icon>
+        </v-btn>
+        <v-menu bottom left>
+            <v-btn slot="activator" icon>
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+
+            <v-list>
+              <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
+                <v-list-tile-title>Sign in</v-list-tile-title>
+              </router-link>
+              <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
+                <v-list-tile-title>About</v-list-tile-title>
+              </router-link>
+            </v-list>
+          </v-menu>
+      </v-toolbar>
+
+      <v-layout row pb-2 style="margin-top: -55px;">
+      <v-flex xs12 md10 lg8 offset-xs0 offset-md1 offset-lg2>
+        <v-card class="card--flex-toolbar">
+          <router-view/>
+        </v-card>
+      </v-flex>
+    </v-layout>
+    <v-footer height="auto" color="footer-color">
+        <v-layout justify-center row wrap>
+          <v-btn flat round v-on:click="changeLanguage">{{ $t('footer.change-language') }}</v-btn>
+          <v-btn flat round :href="'https://github.com/saxionroosters/web'" v-html="$t('footer.project-github')"></v-btn>
+          <v-btn flat round :href="'mailto:wessel@perik.me'" v-html="$t('footer.contact')"></v-btn>
+          <v-flex footer-color py-3 text-xs-center xs12 v-html="$t('footer.copyright') + ' ' + $t('footer.license') + '<br><br>' + $t('footer.disclaimer')"></v-flex>
+        </v-layout>
+      </v-footer>
+    <!-- <v-card flat>
+      <v-toolbar color="white" light flat>
+        <router-link tag="v-toolbar-title" class="btn btn--flat" v-bind:to="{ name: 'Home' }"><img class="toolbar-logo" src="./assets/navbar-logo.png"/></router-link>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <router-link tag="v-btn" class="btn btn--flat" v-bind:to="{ name: 'Home' }"> {{ $t('titles.home') }} </router-link>
+          <router-link tag="v-btn" class="btn btn--flat" v-bind:to="{ name: 'Groups' }"> {{ $tc('titles.group', 2) }} </router-link>
+          <router-link tag="v-btn" class="btn btn--flat" v-bind:to="{ name: 'Teachers' }"> {{ $tc('titles.teacher', 2) }} </router-link>
+        </v-toolbar-items>
+      </v-toolbar>
+      <v-layout row pb-2>
+        <v-flex xs10 offset-xs1>
+          <router-view/>
+        </v-flex>
+      </v-layout>
+    </v-card>
+    <v-bottom-nav :value="true" absolute color="transparent" class="hidden-md-and-up">
+      <v-btn flat color="green" value="campaigns" to="/campaigns">
+        <span>Campagnes</span>
+        <v-icon>flag</v-icon>
+      </v-btn>
+      <v-btn flat color="green" value="questions" to="/questions">
+        <span>Vragen</span>
+        <v-icon>check</v-icon>
+      </v-btn>
+      <v-btn flat color="green" value="places" to="/places">
+        <span>Plaatsen</span>
+        <v-icon>place</v-icon>
+      </v-btn>
+      <v-btn flat color="green" value="categories" to="/categories">
+        <span>Categorieën</span>
+        <v-icon>star</v-icon>
+      </v-btn>
+    </v-bottom-nav> -->
+  </v-app>
+
+  <!--
   <div id="app">
     <header>
       <nav class="navbar navbar-light navbar-expand-md fixed-top" style="background-color: #4CAF50;">
@@ -54,12 +163,18 @@
             </ul>
         </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 export default {
   name: 'App',
+  data: function() {
+    return {
+        items: ['EHI2VSe', 'EHI2VSa', 'EHI3VSta'],
+        selectedItem: 'EHI2VSe'
+    }
+  },
   methods: {
     changeLanguage: function() {
       if (Cookies.get('locale') !== undefined) {
@@ -78,6 +193,33 @@ export default {
 </script>
 
 <style>
+  nav.toolbar .toolbar-logo {
+    height: 50px;
+    margin-left: 5px;
+  }
+
+  nav.toolbar .toolbar-logo:hover {
+    cursor: pointer;
+  }
+
+  nav.toolbar .toolbar__content {
+    height: 64px !important;
+  }
+
+  .saxionroosters {
+    background-color: #8BC34A !important;
+    border-color: #8BC34A !important;
+  }
+
+  .footer-color {
+    background-color: rgb(245, 245, 245) !important;
+    border-color: rgb(245, 245, 245) !important;
+  }
+
+  .toolbar__content {
+    height: 64px !important;
+  }
+/*
 html, body {
   height: 100%;
 }
@@ -93,6 +235,7 @@ main {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
   color: #2c3e50;
 }
 
@@ -177,6 +320,11 @@ main {
   }
 }
 
+.card {
+    border: 0;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.02), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+
 .footer {
   position: relative;
   margin-top: -175px;
@@ -187,12 +335,21 @@ main {
   text-align: center;
   background-color: #f7f7f7;
 }
-
+*/
+.footer {
+  color: #5c5c5c !important;
+}
 .footer a {
   font-weight: 500;
+  text-decoration: none;
+  background-color: transparent;
   color: #464a4c;
 }
 
+.footer a:hover:not(.btn) {
+  text-decoration: underline;
+}
+/*
 .footer .footer-links {
   padding-left: 0;
   margin-bottom: 1rem;
@@ -273,5 +430,5 @@ main {
 }
 .drawer .content ul.menu li.item:active {
   background: rgba(0, 0, 0, 0.12);
-}
+} */
 </style>

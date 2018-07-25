@@ -1,7 +1,7 @@
 <template>
   <div class="container home">
     <h1 class="title"> {{ $t('titles.home') }} </h1>
-    <div class="card">
+    <div>
       <input class="search form-control" type="text" v-model="search" v-on:input="executeSearch(search)" v-bind:placeholder="$t('home.search-hint')"/>
 
       <h4 v-if="search.length < 2" class="table-title recently-viewed"> {{ $t('home.recent-groups') }} </h4>

@@ -5,6 +5,9 @@ import Group from '@/components/Group'
 import Groups from '@/components/Groups'
 import Teacher from '@/components/Teacher'
 import Teachers from '@/components/Teachers'
+import Login from '@/components/Login'
+import Register from '@/components/Register'
+import Verify from '@/components/Verify'
 
 Vue.use(Router)
 
@@ -60,6 +63,26 @@ export default new Router({
 	      path: '/teachers/:academy',
 	      name: 'TeachersAcademy',
 	      component: Teachers
+			},
+			{
+	      path: '/login',
+	      name: 'Login',
+	      component: Login
+	    },
+			{
+	      path: '/register',
+	      name: 'Register',
+	      component: Register
+			},
+			{
+	      path: '/verify',
+	      name: 'Verify',
+	      component: Verify
+	    },
+			{
+	      path: '/verify/:email',
+	      name: 'Verify2',
+	      component: Verify
 	    }
 	  ]
 })

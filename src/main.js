@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import Vuetify from 'vuetify'
 import VueAnalytics from 'vue-analytics'
 import App from './App'
 import router from './router'
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
 
-Vue.use(VueI18n)
+Vue.use(VueI18n);
+Vue.use(Vuetify);
 Vue.use(VueAnalytics, {
 	id: 'UA-118294891-1',
 	router
-})
+});
 
 const translations = {
   en: {
@@ -44,8 +47,8 @@ const translations = {
 	  },
       footer: {
       	"change-language": "Nederlands",
-      	"project-github": "<a href='https://github.com/wesselperik/saxionroosters'>Project on GitHub</a>",
-      	"contact": "<a href='mailto:wessel@perik.me'>Contact the developer</a>",
+      	"project-github": "Project on GitHub",
+      	"contact": "Contact the developer",
       	"copyright": "&copy; 2018 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a>.",
       	"license": "Code released under the <a rel='license' href='https://github.com/wesselperik/saxionroosters/blob/master/LICENSE' target='_blank'>MIT</a> license.",
       	"disclaimer": "The information on this site is directly fetched from the official <a href='http://api.roosters.saxion.nl/' target='_blank'>Saxion @:schedules API</a>.<br> No rights can be derived from this information."
@@ -82,8 +85,8 @@ const translations = {
 	  },
       footer: {
 	  	"change-language": "English",
-      	"project-github": "<a href='https://github.com/wesselperik/saxionroosters'>Project op GitHub</a>",
-      	"contact": "<a href='mailto:wessel@perik.me'>Contacteer ontwikkelaar</a>",
+      	"project-github": "Project op GitHub",
+      	"contact": "Contacteer ontwikkelaar",
       	"copyright": "&copy; 2018 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a>.",
       	"license": "Code vrijgegeven onder de <a rel='license' href='https://github.com/wesselperik/saxionroosters/blob/master/LICENSE' target='_blank'>MIT</a> licentie.",
       	"disclaimer": "De informatie op deze site komt direct vanuit de offici&euml;le <a href='http://api.roosters.saxion.nl/' target='_blank'>Saxion @:schedules API</a>.<br> Er kunnen geen rechten ontleend worden aan deze informatie."
