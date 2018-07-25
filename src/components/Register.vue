@@ -1,10 +1,10 @@
 <template>
     <v-flex text-xs-center row wrap>
-        <h1 class="title">Register</h1>
-        <p>We will send you an email with a verification code to register your account and this device.</p>
-        <v-text-field box color="black" label="Email adress" append-icon="mail"></v-text-field>
-        <router-link tag="v-btn" class="btn btn--large btn--flat" v-bind:to="{ name: 'Login' }">Back to login</router-link>
-        <v-btn large :loading="loading" :disabled="loading" color="saxionroosters" class="white--text" @click.native="loader = 'loading'">Submit</v-btn> 
+        <h1 class="title">{{ $t('titles.register') }}</h1>
+        <p v-html="$t('register.register-info')"></p>
+        <v-text-field box color="black" :label="$t('login.email-hint')" append-icon="mail"></v-text-field>
+        <router-link tag="v-btn" class="btn btn--large btn--flat" v-bind:to="{ name: 'Login' }">{{ $t('register.button-back-to-login') }}</router-link>
+        <v-btn large :loading="loading" :disabled="loading" color="saxionroosters" class="white--text" @click.native="loader = 'loading'">{{ $t('register.button-submit') }}</v-btn> 
     </v-flex>
 </template>
 

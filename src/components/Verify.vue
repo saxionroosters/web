@@ -1,9 +1,12 @@
 <template>
     <v-flex text-xs-center row wrap>
-        <h1 class="title">Verification</h1>
-        <p>We have sent you an email with a verification code. Please enter this (six-digit) code below.</p>
-        <v-text-field box v-model="code" name="code" id="code" color="black" label="Verification code" append-icon="lock"></v-text-field>
-        <v-btn large :loading="loading" :disabled="loading" color="saxionroosters" class="white--text" @click.native="verify()">Submit</v-btn> 
+        <h1 class="title">{{ $t('titles.verify') }}</h1>
+        <p v-html="$t('verify.verification-info')"></p>
+        <v-text-field box v-model="code" name="code" id="code" color="black" :label="$t('verify.verification-hint')" append-icon="lock"></v-text-field>
+        <v-btn large :loading="loading" :disabled="loading" color="saxionroosters" class="white--text" @click.native="verify()">{{ $t('verify.button-submit') }}</v-btn> 
+        <v-divider class="divider spacer"></v-divider>
+        <h2>{{ $t('verify.no-email-received') }}</h2>
+        <p v-html="$t('verify.no-email-info')"></p>
     </v-flex>
 </template>
 
@@ -90,13 +93,19 @@ export default {
 
 <style scoped>
 h1, h2 {
-  font-weight: normal;
+  font-family: 'Nunito', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
+  font-weight: 400;
 }
 
 h1.title {
-  font-family: 'Nunito', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 2.6em !important;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1.8em !important;
   margin-bottom: 20px;
 }
 
@@ -116,6 +125,11 @@ a {
 
 .flex {
   padding: 30px;
+}
+
+.spacer {
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 td {
