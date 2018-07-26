@@ -43,17 +43,6 @@ export default {
 </script>
 
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-h1.title {
-  font-family: 'Nunito', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
-  font-weight: 900;
-  font-size: 2.6em !important;
-  margin-bottom: 20px;
-}
-
 ul {
   list-style-type: none;
   padding: 0;

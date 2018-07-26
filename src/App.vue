@@ -1,22 +1,21 @@
 <template>
   <v-app id="app">
-      <v-toolbar
-        color="saxionroosters"
-        dark
-        extended
-        flat
-      >
+      <v-toolbar color="saxionroosters" dark extended flat>
         <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
 
         <!-- <v-toolbar-title class="ml-0 pl-3">
           <span class="hidden-sm-and-down">Saxion Roosters</span>
         </v-toolbar-title> -->
-        <v-toolbar-title class="white--text">Saxion Roosters</v-toolbar-title>
+        <router-link tag="v-toolbar-title" v-bind:to="{ name: 'Home' }" class="white--text">Saxion Roosters</router-link>
         <!-- <v-toolbar-title slot="extension" class="white--text">Title</v-toolbar-title> -->
 
         <v-spacer class="hidden-sm-and-down"></v-spacer>
 
-        <v-menu :nudge-width="100">
+        <router-link tag="v-btn" v-bind:to="{ name: 'Login' }" class="btn--depressed black--text white" v-if="!loggedIn">
+          {{ $t('titles.login') }}
+        </router-link>
+
+        <v-menu :nudge-width="100" v-if="loggedIn">
           <v-toolbar-title slot="activator">
             <span v-if="selectedItem">{{ selectedItem }}</span>
             <span v-if="!selectedItem">Schedules</span>
@@ -47,10 +46,17 @@
 
             <v-list>
               <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
-                <v-list-tile-title>Sign in</v-list-tile-title>
+                <v-list-tile-title>{{ $t('titles.about') }}</v-list-tile-title>
               </router-link>
               <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
-                <v-list-tile-title>About</v-list-tile-title>
+                <v-list-tile-title>{{ $t('titles.apps') }}</v-list-tile-title>
+              </router-link>
+              <v-divider></v-divider>
+              <router-link tag="v-list-tile" v-if="!loggedIn" v-bind:to="{ name: 'Login' }">
+                <v-list-tile-title>{{ $t('titles.login') }}</v-list-tile-title>
+              </router-link>
+              <router-link tag="v-list-tile" v-if="loggedIn" v-on:click.native="logout" to="/">
+                <v-list-tile-title>{{ $t('titles.logout') }}</v-list-tile-title>
               </router-link>
             </v-list>
           </v-menu>
@@ -171,8 +177,17 @@ export default {
   name: 'App',
   data: function() {
     return {
-        items: ['EHI2VSe', 'EHI2VSa', 'EHI3VSta'],
-        selectedItem: 'EHI2VSe'
+      token: Cookies.get('token'),
+      loggedIn: false,
+      items: ['EHI2VSe', 'EHI2VSa', 'EHI3VSta'],
+      selectedItem: 'EHI2VSe'
+    }
+  },
+  mounted: function () {
+    if (this.token && this.token != "undefined" && this.token !== undefined) {
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
     }
   },
   methods: {
@@ -187,12 +202,57 @@ export default {
         Cookies.set('locale', 'nl');
       }
       location.reload();
+    },
+    logout: function() {
+      console.log("logout...");
+      if (Cookies.get('token') != '' && Cookies.get('token') != "undefined" && Cookies.get('token') !== undefined) {
+        console.log("logging out...");
+        $.ajax({
+            method: 'POST',
+            dataType: 'json',
+            url: 'http://api.saxionroosters.nl/v1/accounts/logout?access_token=' + Cookies.get('token'),
+            error: function (request, status, error) {
+              // somehow the token is invalid, remove the cookie
+              Cookies.set('token', undefined);
+              return;
+            }.bind(this)
+          }).then((response) => {
+            Cookies.set('token', undefined);
+            location.reload();
+          });
+      } else {
+        console.log("token: " + Cookies.get('token'));
+      }
     }
   }
 }
 </script>
 
 <style>
+  p, li, label, footer, .list__tile__title {
+    font-family: 'Nunito Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif !important;
+  }
+
+  footer a, footer button {
+    font-weight: 600 !important;
+  }
+
+  h1, h2 {
+    font-family: 'Nunito', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif !important;
+    font-weight: 600;
+  }
+
+  h1.title {
+    font-weight: 900;
+    font-size: 2.6em !important;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 1.8em !important;
+    margin-bottom: 20px;
+  }
+
   nav.toolbar .toolbar-logo {
     height: 50px;
     margin-left: 5px;
@@ -218,6 +278,16 @@ export default {
 
   .toolbar__content {
     height: 64px !important;
+  }
+
+  .toolbar__title {
+    font-family: 'Nunito Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 1.6em;
+  }
+
+  .toolbar__title:hover {
+    cursor: pointer;
   }
 /*
 html, body {

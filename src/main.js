@@ -17,132 +17,138 @@ Vue.use(VueAnalytics, {
 
 const translations = {
   en: {
-  	  "schedules": "Schedules",
-  	  titles: {
-		"home": "Home",
-      	"teacher": "Teacher | Teachers",
-      	"group": "Group | Groups",
-        "course": "Course | Courses",
-        "student": "Student | Students",
-        "academy": "Academy | Academies",
-		"schedule": "Schedule | Schedules",
-		"login": "Sign in",
-		"register": "Register",
-		"verify": "Verification"
-  	  },
-  	  subtitles: {
-  	  	"choose-academy": "Choose an academy"
-  	  },
-  	  home: {
-  	  	"search-hint": "Search for groups, teachers, courses, academies or students...",
-  	  	"recent-groups": "Recently viewed groups",
-  	  	"no-recent-groups": "No recently viewed groups.",
-  	  	"recent-teachers": "Recently viewed teachers",
-  	  	"no-recent-teachers": "No recently viewed teachers."
-  	  },
-  	  schedule: {
-  	  	"teachers": "teachers",
-  	  	"rooms": "rooms",
-  	  	"no-classes": "No classes"
+  	"schedules": "Schedules",
+  	titles: {
+			"home": "Home",
+			"teacher": "Teacher | Teachers",
+			"group": "Group | Groups",
+			"course": "Course | Courses",
+			"student": "Student | Students",
+			"academy": "Academy | Academies",
+			"schedule": "Schedule | Schedules",
+			"about": "About",
+			"apps": "Apps",
+			"login": "Sign in",
+			"logout": "Sign out",
+			"register": "Register",
+			"verify": "Verification"
+  	},
+  	subtitles: {
+  	  "choose-academy": "Choose an academy"
+  	},
+  	home: {
+  	  "search-hint": "Search for groups, teachers, courses, academies or students...",
+  	  "recent-groups": "Recently viewed groups",
+  	  "no-recent-groups": "No recently viewed groups.",
+  	  "recent-teachers": "Recently viewed teachers",
+  	  "no-recent-teachers": "No recently viewed teachers."
+  	},
+  	schedule: {
+  	  "teachers": "teachers",
+  	  "rooms": "rooms",
+  	  "no-classes": "No classes"
 	  },
 	  login: {
-		"no-account": "No account?",
-		"email-hint": "Email adress",
-		"register-info-1": "Register an account by just entering your email adress. Registering an account has some great benefits:",
-		"register-info-2": "Logging in doesn't require any passwords, just your email adress.<br>We will send you an email with a verification code each time you log in to a new device.",
-		"register-benefit-1": "add your own events to your schedule",
-		"register-benefit-2": "sync your events and saved schedules across all your devices",
-		"button-submit": "Submit",
-		"button-register": "Register my account"
+			"no-account": "No account?",
+			"email-hint": "Email adress",
+			"register-info-1": "Register an account by just entering your email adress. Registering an account has some great benefits:",
+			"register-info-2": "Logging in doesn't require any passwords, just your email adress.<br>We will send you an email with a verification code each time you log in to a new device.",
+			"register-benefit-1": "add your own events to your schedule",
+			"register-benefit-2": "sync your events and saved schedules across all your devices",
+			"button-submit": "Submit",
+			"button-register": "Register my account"
 	  },
 	  register: {
-		"email-hint": "Email adress",
-		"register-info": "We will send you an email with a verification code to register your account and this device.",
-		"button-submit": "Submit",
-		"button-back-to-login": "Back to login"
+			"email-hint": "Email adress",
+			"register-info": "We will send you an email with a verification code to register your account and this device.",
+			"button-submit": "Submit",
+			"button-back-to-login": "Back to login"
 	  },
 	  verify: {
-		"verification-info": "We have sent you an email with a verification code. Please enter this (six-digit) code below.",
-		"verification-hint": "Verification code",
-		"no-email-received": "No email received?",
-		"no-email-info": "Check if the email did not end up in your spam box by accident.<br>Is there no email? Wait for about 15 minutes, it occurs that the email is delivered with a delay.<br>Still no email? Try logging in again or <a href='mailto:wessel@perik.me'>contact the developer</a>.",
-		"button-submit": "Submit"
+			"verification-info": "We have sent you an email with a verification code. Please enter this (six-digit) code below.",
+			"verification-hint": "Verification code",
+			"no-email-received": "No email received?",
+			"no-email-info": "Check if the email did not end up in your spam box by accident.<br>Is there no email? Wait for about 15 minutes, it occurs that the email is delivered with a delay.<br>Still no email? Try logging in again or <a href='mailto:wessel@perik.me'>contact the developer</a>.",
+			"button-submit": "Submit"
 	  },
 	  drawer_footer: {
-		"change-language": "Taal veranderen"
+			"change-language": "Taal veranderen"
 	  },
-      footer: {
-      	"change-language": "Nederlands",
-      	"project-github": "Project on GitHub",
-      	"contact": "Contact the developer",
-      	"copyright": "&copy; 2018 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a>.",
-      	"license": "Code released under the <a rel='license' href='https://github.com/wesselperik/saxionroosters/blob/master/LICENSE' target='_blank'>MIT</a> license.",
-      	"disclaimer": "The information on this site is directly fetched from the official <a href='http://api.roosters.saxion.nl/' target='_blank'>Saxion @:schedules API</a>.<br> No rights can be derived from this information."
-      }
+    footer: {
+      "change-language": "Nederlands",
+      "project-github": "Project on GitHub",
+      "contact": "Contact the developer",
+      "copyright": "&copy; 2018 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a>.",
+      "license": "Code released under the <a rel='license' href='https://github.com/wesselperik/saxionroosters/blob/master/LICENSE' target='_blank'>MIT</a> license.",
+      "disclaimer": "The information on this site is directly fetched from the official <a href='http://api.roosters.saxion.nl/' target='_blank'>Saxion @:schedules API</a>.<br> No rights can be derived from this information."
+    }
   },
   nl: {
 	  "schedules": "Roosters",
 	  titles: {
 	  	"home": "Home",
-		"teacher": "Docent | Docenten",
-		"group": "Klas | Klassen",
-      	"course": "Opleiding | Opleidingen",
-      	"student": "Student | Studenten",
-      	"academy": "Academie | Academies",
-		"schedule": "Rooster | Roosters",
-		"login": "Inloggen",
-		"register": "Registreren",
-		"verify": "Verificatie"
+			"teacher": "Docent | Docenten",
+			"group": "Klas | Klassen",
+      "course": "Opleiding | Opleidingen",
+      "student": "Student | Studenten",
+      "academy": "Academie | Academies",
+			"schedule": "Rooster | Roosters",
+			"about": "Over deze site",
+			"apps": "Apps",
+			"login": "Inloggen",
+			"logout": "Uitloggen",
+			"register": "Registreren",
+			"verify": "Verificatie"
 	  },
 	  subtitles: {
-  	  	"choose-academy": "Kies een academie"
-  	  },
-  	  home: {
-  	  	"search-hint": "Zoek op klas, docent, opleiding, academie of studentnummer...",
-  	  	"recent-groups": "Recent bekeken klassen",
-  	  	"no-recent-groups": "Geen recent bekeken klassen.",
-  	  	"recent-teachers": "Recent bekeken docenten",
-  	  	"no-recent-teachers": "Geen recent bekeken docenten."
-  	  },
-  	  schedule: {
-  	  	"teachers": "docenten",
-  	  	"rooms": "lokalen",
-  	  	"no-classes": "Geen lessen"
+  	  "choose-academy": "Kies een academie"
+  	},
+  	home: {
+  	  "search-hint": "Zoek op klas, docent, opleiding, academie of studentnummer...",
+  	  "recent-groups": "Recent bekeken klassen",
+  	  "no-recent-groups": "Geen recent bekeken klassen.",
+  	  "recent-teachers": "Recent bekeken docenten",
+  	  "no-recent-teachers": "Geen recent bekeken docenten."
+  	},
+  	schedule: {
+  	  "teachers": "docenten",
+  	  "rooms": "lokalen",
+  	  "no-classes": "Geen lessen"
 	  },
 	  login: {
-		"no-account": "Nog geen account?",
-		"email-hint": "Emailadres",
-		"register-info-1": "Een account registreren kan met je emailadres. Met een account krijg je de beschikking tot een aantal handige functies:",
-		"register-info-2": "Inloggen vereist geen wachtwoorden, alleen je emailadres.<br>We sturen je een email met een verificatiecode iedere keer dat je inlogd op een nieuw apparaat.",
-		"register-benefit-1": "voeg je eigen afspraken toe aan je rooster",
-		"register-benefit-2": "synchroniseer je afspraken en opgeslagen roosters met al je apparaten",
-		"button-submit": "Ga verder",
-		"button-register": "Registreer mijn account"
+			"no-account": "Nog geen account?",
+			"email-hint": "Emailadres",
+			"register-info-1": "Een account registreren kan met je emailadres. Met een account krijg je de beschikking tot een aantal handige functies:",
+			"register-info-2": "Inloggen vereist geen wachtwoorden, alleen je emailadres.<br>We sturen je een email met een verificatiecode iedere keer dat je inlogd op een nieuw apparaat.",
+			"register-benefit-1": "voeg je eigen afspraken toe aan je rooster",
+			"register-benefit-2": "synchroniseer je afspraken en opgeslagen roosters met al je apparaten",
+			"button-submit": "Ga verder",
+			"button-register": "Registreer mijn account"
 	  },
 	  register: {
-		"email-hint": "Emailadres",
-		"register-info": "We zullen je een email sturen met een verificatiecode om je account en dit apparaat te registreren.",
-		"button-submit": "Ga verder",
-		"button-back-to-login": "Terug naar inloggen"
+			"email-hint": "Emailadres",
+			"register-info": "We zullen je een email sturen met een verificatiecode om je account en dit apparaat te registreren.",
+			"button-submit": "Ga verder",
+			"button-back-to-login": "Terug naar inloggen"
 	  },
 	  verify: {
-		"verification-info": "We hebben je een email gestuurd met een verificatiecode. Voer deze (zes-cijferige) code hieronder in.",
-		"verification-hint": "Verificatiecode",
-		"no-email-received": "Geen email ontvangen?",
-		"no-email-info": "Check of de email niet per ongeluk in je spambox terecht is gekomen.<br>Staat hier geen email in? Wacht eerst een kwartier, het kan zijn dat de email vertraagd wordt afgeleverd.<br>Mocht je hierna nog geen email hebben, probeer het dan opnieuw of <a href='mailto:wessel@perik.me'>neem contact op met de ontwikkelaar</a>.",
-		"button-submit": "Ga verder"
+			"verification-info": "We hebben je een email gestuurd met een verificatiecode. Voer deze (zes-cijferige) code hieronder in.",
+			"verification-hint": "Verificatiecode",
+			"no-email-received": "Geen email ontvangen?",
+			"no-email-info": "Check of de email niet per ongeluk in je spambox terecht is gekomen.<br>Staat hier geen email in? Wacht eerst een kwartier, het kan zijn dat de email vertraagd wordt afgeleverd.<br>Mocht je hierna nog geen email hebben, probeer het dan opnieuw of <a href='mailto:wessel@perik.me'>neem contact op met de ontwikkelaar</a>.",
+			"button-submit": "Ga verder"
 	  },
 	  drawer_footer: {
-		"change-language": "Change language"
+			"change-language": "Change language"
 	  },
-      footer: {
+    footer: {
 	  	"change-language": "English",
-      	"project-github": "Project op GitHub",
-      	"contact": "Contacteer ontwikkelaar",
-      	"copyright": "&copy; 2018 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a>.",
-      	"license": "Code vrijgegeven onder de <a rel='license' href='https://github.com/wesselperik/saxionroosters/blob/master/LICENSE' target='_blank'>MIT</a> licentie.",
-      	"disclaimer": "De informatie op deze site komt direct vanuit de offici&euml;le <a href='http://api.roosters.saxion.nl/' target='_blank'>Saxion @:schedules API</a>.<br> Er kunnen geen rechten ontleend worden aan deze informatie."
-      }
+      "project-github": "Project op GitHub",
+      "contact": "Contacteer ontwikkelaar",
+      "copyright": "&copy; 2018 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a>.",
+      "license": "Code vrijgegeven onder de <a rel='license' href='https://github.com/wesselperik/saxionroosters/blob/master/LICENSE' target='_blank'>MIT</a> licentie.",
+      "disclaimer": "De informatie op deze site komt direct vanuit de offici&euml;le <a href='http://api.roosters.saxion.nl/' target='_blank'>Saxion @:schedules API</a>.<br> Er kunnen geen rechten ontleend worden aan deze informatie."
+    }
   }
 }
 

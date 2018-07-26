@@ -32,14 +32,6 @@ export default {
   },
 
   watch: {
-    loader () {
-        const l = this.loader
-        this[l] = !this[l]
-
-        setTimeout(() => (this[l] = false), 3000)
-
-        this.loader = null
-    },
     '$route' (to, from) {
       if (this.$route.params.email === undefined) {
         this.$router.push({ name: 'Login' })
@@ -78,10 +70,9 @@ export default {
           }).then((response) => {
             console.log(response);
             if (response.confirmation.id != null) {
-              alert(response.confirmation.id)
-                // this.$router.push({ name: 'Verify' })
+              Cookies.set('token', response.confirmation.id);
+              window.location = '/'
             }
-
             this.loader = null;
             this.loading = false;
           });
@@ -92,23 +83,6 @@ export default {
 </script>
 
 <style scoped>
-h1, h2 {
-  font-family: 'Nunito', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
-  font-weight: 400;
-}
-
-h1.title {
-  font-weight: 900;
-  font-size: 2.6em !important;
-  margin-bottom: 20px;
-}
-
-h2 {
-  font-weight: 600;
-  font-size: 1.8em !important;
-  margin-bottom: 20px;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
