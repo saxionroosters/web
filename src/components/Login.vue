@@ -48,7 +48,9 @@ export default {
   },
 
   mounted: function () {
-
+    if (Cookies.get('token') && Cookies.get('token') != "undefined" && Cookies.get('token') !== undefined) {
+      this.$router.push({ name: 'Home'});
+    }
   },
 
   watch: {

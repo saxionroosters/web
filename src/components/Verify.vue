@@ -23,7 +23,10 @@ export default {
   },
 
   mounted: function () {
-    console.log(this.$route.params.email);
+    if (Cookies.get('token') && Cookies.get('token') != "undefined" && Cookies.get('token') !== undefined) {
+      this.$router.push({ name: 'Home'});
+    }
+
     if (this.$route.params.email === undefined) {
       this.$router.push({ name: 'Login' })
     } else {
