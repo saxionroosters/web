@@ -2,9 +2,9 @@
     <v-flex text-xs-center row wrap>
         <h1 class="title">{{ $t('titles.register') }}</h1>
         <p v-html="$t('register.register-info')"></p>
-        <v-text-field box color="black" :label="$t('login.email-hint')" append-icon="mail"></v-text-field>
+        <v-text-field box v-model="email" name="email" id="email" color="black" :label="$t('login.email-hint')" append-icon="mail"></v-text-field>
         <router-link tag="v-btn" class="btn btn--large btn--flat" v-bind:to="{ name: 'Login' }">{{ $t('register.button-back-to-login') }}</router-link>
-        <v-btn large :loading="loading" :disabled="loading" color="saxionroosters" class="white--text" @click.native="loader = 'loading'">{{ $t('register.button-submit') }}</v-btn> 
+        <v-btn large :loading="loading" :disabled="loading" color="saxionroosters" class="white--text" @click.native="register()">{{ $t('register.button-submit') }}</v-btn> 
     </v-flex>
 </template>
 
@@ -14,7 +14,8 @@ export default {
   data: function() {
     return {
         loader: null,
-        loading: false
+        loading: false,
+        email: ''
     }
   },
 
@@ -24,22 +25,42 @@ export default {
     }
   },
 
-  watch: {
-    loader () {
-        const l = this.loader
-        this[l] = !this[l]
-
-        setTimeout(() => (this[l] = false), 3000)
-
-        this.loader = null
-    },
-    '$route' (to, from) {
-
-    }
-  },
-
   methods: {
-    
+    register: function() {
+        this.loader = 'loading';
+        this.loading = true;
+
+        var data = {};
+        data.email = this.email;
+
+        if (data.email.length == 0) {
+          alert("No email entered!");
+        } else {
+          $.ajax({
+            method: 'POST',
+            data: data,
+            dataType: 'json',
+            url: 'http://api.saxionroosters.nl/v1/accounts/register',
+            error: function (request, status, error) {
+              console.log(status + ' | ' + error);
+              if (error == 'Internal Server Error') {
+                  alert('An error occured whilst registering your account');
+              }
+              this.loader = null;
+              this.loading = false;
+              return;
+            }.bind(this)
+          }).then((response) => {
+            console.log(response);
+            if (response.email != null) {
+              alert('Account successfully registered! You can sign in now.')
+              this.$router.push({ name: 'Login'});
+            }
+            this.loader = null;
+            this.loading = false;
+          });
+        }
+    }
   }
 }
 </script>

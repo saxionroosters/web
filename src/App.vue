@@ -9,9 +9,9 @@
         <router-link tag="v-toolbar-title" v-bind:to="{ name: 'Home' }" class="white--text">Saxion Roosters</router-link>
         <!-- <v-toolbar-title slot="extension" class="white--text">Title</v-toolbar-title> -->
 
-        <v-spacer class="hidden-sm-and-down"></v-spacer>
+        <v-spacer></v-spacer>
 
-        <router-link tag="v-btn" v-bind:to="{ name: 'Login' }" class="btn--depressed black--text white" v-if="!loggedIn">
+        <router-link tag="v-btn" v-bind:to="{ name: 'Login' }" class="btn--depressed black--text white hidden-sm-and-down" v-if="!loggedIn">
           {{ $t('titles.login') }}
         </router-link>
 
