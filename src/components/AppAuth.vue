@@ -38,7 +38,4 @@
       }
     }
   }
-
-
-  // openApp()
 </script>
