@@ -9,6 +9,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Verify from '@/components/Verify'
 import Settings from '@/components/Settings'
+import AppAuth from '@/components/AppAuth'
 
 Vue.use(Router)
 
@@ -89,6 +90,11 @@ export default new Router({
 	      path: '/settings',
 	      name: 'Settings',
 	      component: Settings
-	    }
+	    },
+      {
+        path: '/app-auth',
+        name: 'AppAuth',
+        component: AppAuth
+      }
 	  ]
 })

@@ -60,6 +60,13 @@ const translations = {
 			"button-submit": "Submit",
 			"button-register": "Register"
 	  },
+    app_auth:{
+      "button-back-to-app" : "Back to app",
+      "title-success" : "Success",
+      "message-success" : "You're logged in, get back to the app.",
+      "title-failure" : "Rip, something went wrong...",
+      "message-failure" : "Please try it again.",
+    },
 	  register: {
 			"email-hint": "Email adress",
 			"register-info": "We will send you an email with a verification code to register your account and this device.",
@@ -129,6 +136,13 @@ const translations = {
 			"button-submit": "Ga verder",
 			"button-register": "Registreren"
 	  },
+    app_auth:{
+      "button-back-to-app" : "Terug naar app",
+      "title-success" : "Gelukt",
+      "message-success" : "Je bent ingelogd, je kan nu terug naar de app",
+      "title-failure" : "Daar ging iets mis...",
+      "message-failure" : "Probeer het opnieuw",
+    },
 	  register: {
 			"email-hint": "Emailadres",
 			"register-info": "We zullen je een email sturen met een verificatiecode om je account en dit apparaat te registreren.",
