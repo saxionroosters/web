@@ -1,16 +1,18 @@
 <template>
-    <v-flex text-xs-center row wrap>
-        <h1 class="title">{{ $t('titles.register') }}</h1>
-        <p v-html="$t('register.register-info')"></p>
-        <v-text-field box v-model="email" name="email" id="email" color="black" :label="$t('login.email-hint')" append-icon="mail"></v-text-field>
-        <router-link tag="v-btn" class="btn btn--large btn--flat" v-bind:to="{ name: 'Login' }">{{ $t('register.button-back-to-login') }}</router-link>
-        <v-btn large :loading="loading" :disabled="loading" color="saxionroosters" class="white--text" @click.native="register()">{{ $t('register.button-submit') }}</v-btn> 
+    <v-flex row wrap>
+        <h1 class="title">{{ $t('titles.settings') }}</h1>
+        <v-divider class="divider spacer"></v-divider>
+        <h2>Account</h2>
+        <v-divider class="divider spacer"></v-divider>
+        <h2>Opgeslagen roosters</h2>
+        <v-divider class="divider spacer"></v-divider>
+        <h2>Ingelogde apparaten</h2>
     </v-flex>
 </template>
 
 <script>
 export default {
-  name: 'Register',
+  name: 'Settings',
   data: function() {
     return {
         loader: null,
@@ -20,13 +22,19 @@ export default {
   },
 
   mounted: function () {
-    if (Cookies.get('token') && Cookies.get('token') != "undefined" && Cookies.get('token') !== undefined) {
-      this.$router.push({ name: 'Home'});
+    if (!Cookies.get('token') || Cookies.get('token') == "undefined" || Cookies.get('token') === undefined) {
+      this.$router.push({ name: 'Login'});
+    }
+  },
+
+  watch: {
+    '$route' (to, from) {
+
     }
   },
 
   methods: {
-    register: function() {
+    login: function() {
         this.loader = 'loading';
         this.loading = true;
 
@@ -34,27 +42,28 @@ export default {
         data.email = this.email;
 
         if (data.email.length == 0) {
-          alert("No email entered!");
+          this.loader = null;
+          this.loading = false;
+          alert("No email adress entered!");
         } else {
           $.ajax({
             method: 'POST',
             data: data,
             dataType: 'json',
-            url: 'http://api.saxionroosters.nl/v1/accounts/register',
+            url: 'http://api.saxionroosters.nl/v1/accounts/requestCode',
             error: function (request, status, error) {
-              alert('Account with given email already registered!');
-
+              if (error == 'Not Found') {
+                  alert('No account registered with given email');
+              }
               this.loader = null;
               this.loading = false;
-
               return;
             }.bind(this)
           }).then((response) => {
-            console.log(response);
-            if (response.email != null) {
-              alert('Account successfully registered! You can sign in now.')
-              this.$router.push({ name: 'Login'});
+            if (response.response == 'success') {
+                this.$router.push({ name: 'Verify', params: { email: this.email }})
             }
+
             this.loader = null;
             this.loading = false;
           });
@@ -79,8 +88,25 @@ a {
   color: #42b983;
 }
 
-.flex {
+.flex:not(.flex-items) {
   padding: 30px;
+}
+
+.flex-items {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.overflow {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: unset;
+    height: initial;
+}
+
+.spacer {
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 td {

@@ -1,13 +1,7 @@
 <template>
   <v-app id="app">
       <v-toolbar color="saxionroosters" dark extended flat>
-        <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-
-        <!-- <v-toolbar-title class="ml-0 pl-3">
-          <span class="hidden-sm-and-down">Saxion Roosters</span>
-        </v-toolbar-title> -->
         <router-link tag="v-toolbar-title" v-bind:to="{ name: 'Home' }" class="white--text">Saxion Roosters</router-link>
-        <!-- <v-toolbar-title slot="extension" class="white--text">Title</v-toolbar-title> -->
 
         <v-spacer></v-spacer>
 
@@ -23,8 +17,8 @@
           </v-toolbar-title>
 
           <v-list>
-            <router-link @click="selectedItem = item" tag="v-list-tile" v-bind:to="{ name: 'Group', params: { group: item }}" v-for="item in items" :key="item">
-              <v-list-tile-title v-text="item"></v-list-tile-title>
+            <router-link @click="selectedItem = item" tag="v-list-tile" v-bind:to="{ name: 'Group', params: { group: item.class }}" v-for="item in items" :key="item.class">
+              <v-list-tile-title v-html="item.class + '<span> - ' + item.name + '</span>'"></v-list-tile-title>
             </router-link>
             <v-divider></v-divider>
             <router-link @click="selectedItem = ''" tag="v-list-tile" v-bind:to="{ name: 'Home' }">
@@ -36,25 +30,41 @@
         <v-btn icon style="margin-left: 25px;">
           <v-icon>search</v-icon>
         </v-btn>
-        <v-btn icon>
-          <v-icon>settings</v-icon>
-        </v-btn>
         <v-menu bottom left>
             <v-btn slot="activator" icon>
               <v-icon>more_vert</v-icon>
             </v-btn>
 
-            <v-list>
+            <v-list style="min-width: 150px;">
+              <v-list-tile v-if="loggedIn">
+                <v-list-tile-content>
+                  <v-list-tile-sub-title>{{ $t('loggedin-as') }}</v-list-tile-sub-title>
+                  <v-list-tile-title>{{ email }}</v-list-tile-title>
+                </v-list-tile-content>
+
+                <v-list-tile-action>
+                  <router-link tag="v-btn" class="btn--icon" v-bind:to="{ name: 'Settings' }">
+                    <v-icon>settings</v-icon>
+                  </router-link>
+                </v-list-tile-action>
+              </v-list-tile>
+
+              <v-divider style="margin-top: 5px;" v-if="loggedIn"></v-divider>
+
               <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
                 <v-list-tile-title>{{ $t('titles.about') }}</v-list-tile-title>
               </router-link>
+
               <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
                 <v-list-tile-title>{{ $t('titles.apps') }}</v-list-tile-title>
               </router-link>
+
               <v-divider></v-divider>
+
               <router-link tag="v-list-tile" v-if="!loggedIn" v-bind:to="{ name: 'Login' }">
                 <v-list-tile-title>{{ $t('titles.login') }}</v-list-tile-title>
               </router-link>
+
               <router-link tag="v-list-tile" v-if="loggedIn" v-on:click.native="logout" to="/">
                 <v-list-tile-title>{{ $t('titles.logout') }}</v-list-tile-title>
               </router-link>
@@ -70,106 +80,14 @@
       </v-flex>
     </v-layout>
     <v-footer height="auto" color="footer-color">
-        <v-layout justify-center row wrap>
-          <v-btn flat round v-on:click="changeLanguage">{{ $t('footer.change-language') }}</v-btn>
-          <v-btn flat round :href="'https://github.com/saxionroosters/web'" v-html="$t('footer.project-github')"></v-btn>
-          <v-btn flat round :href="'mailto:wessel@perik.me'" v-html="$t('footer.contact')"></v-btn>
-          <v-flex footer-color py-3 text-xs-center xs12 v-html="$t('footer.copyright') + ' ' + $t('footer.license') + '<br><br>' + $t('footer.disclaimer')"></v-flex>
-        </v-layout>
-      </v-footer>
-    <!-- <v-card flat>
-      <v-toolbar color="white" light flat>
-        <router-link tag="v-toolbar-title" class="btn btn--flat" v-bind:to="{ name: 'Home' }"><img class="toolbar-logo" src="./assets/navbar-logo.png"/></router-link>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <router-link tag="v-btn" class="btn btn--flat" v-bind:to="{ name: 'Home' }"> {{ $t('titles.home') }} </router-link>
-          <router-link tag="v-btn" class="btn btn--flat" v-bind:to="{ name: 'Groups' }"> {{ $tc('titles.group', 2) }} </router-link>
-          <router-link tag="v-btn" class="btn btn--flat" v-bind:to="{ name: 'Teachers' }"> {{ $tc('titles.teacher', 2) }} </router-link>
-        </v-toolbar-items>
-      </v-toolbar>
-      <v-layout row pb-2>
-        <v-flex xs10 offset-xs1>
-          <router-view/>
-        </v-flex>
+      <v-layout justify-center row wrap>
+        <v-btn flat round v-on:click="changeLanguage">{{ $t('footer.change-language') }}</v-btn>
+        <v-btn flat round :href="'https://github.com/saxionroosters/web'" v-html="$t('footer.project-github')"></v-btn>
+        <v-btn flat round :href="'mailto:wessel@perik.me'" v-html="$t('footer.contact')"></v-btn>
+        <v-flex footer-color py-3 text-xs-center xs12 v-html="$t('footer.copyright') + ' ' + $t('footer.license') + '<br><br>' + $t('footer.disclaimer')"></v-flex>
       </v-layout>
-    </v-card>
-    <v-bottom-nav :value="true" absolute color="transparent" class="hidden-md-and-up">
-      <v-btn flat color="green" value="campaigns" to="/campaigns">
-        <span>Campagnes</span>
-        <v-icon>flag</v-icon>
-      </v-btn>
-      <v-btn flat color="green" value="questions" to="/questions">
-        <span>Vragen</span>
-        <v-icon>check</v-icon>
-      </v-btn>
-      <v-btn flat color="green" value="places" to="/places">
-        <span>Plaatsen</span>
-        <v-icon>place</v-icon>
-      </v-btn>
-      <v-btn flat color="green" value="categories" to="/categories">
-        <span>Categorieën</span>
-        <v-icon>star</v-icon>
-      </v-btn>
-    </v-bottom-nav> -->
+    </v-footer>
   </v-app>
-
-  <!--
-  <div id="app">
-    <header>
-      <nav class="navbar navbar-light navbar-expand-md fixed-top" style="background-color: #4CAF50;">
-        <div class="paper-container ml-auto">
-          <a class="drawer-toggle" href="#" id="drawer-toggle"><i class="material-icons">menu</i></a>
-          <router-link class="navbar-brand" v-bind:to="{ name: 'Home' }"><span>saxion</span>roosters</router-link>
-
-          <div class="navbar-menu">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <router-link class="nav-link" v-bind:to="{ name: 'Groups' }"> {{ $tc('titles.group', 2) }} </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" v-bind:to="{ name: 'Teachers' }"> {{ $tc('titles.teacher', 2) }} </router-link>
-              </li>
-            </ul>
-          </div>
-
-          <img class="navbar-paper" src="./assets/navbar-logo.png" />
-        </div>
-      </nav>
-    </header>
-
-    <div class="main-wrapper">
-      <main role="main">
-        <router-view/>
-      </main>
-    </div>
-
-    <footer class="footer text-muted">
-      <div class="container">
-        <ul class="footer-links">
-          <li><a v-on:click="changeLanguage" href=""> {{ $t('footer.change-language') }} </a></li>
-          <li v-html="$t('footer.project-github')"></li>
-          <li v-html="$t('footer.contact')"></li>
-        </ul>
-        <p v-html="$t('footer.copyright') + ' ' + $t('footer.license')"></p>
-        <p v-html="$t('footer.disclaimer')"></p>
-      </div>
-    </footer>
-
-    <div class="drawer" id="drawer">
-        <div class="content">
-            <div class="header">
-                <img class="image" src="./assets/drawer-logo.png" />
-            </div>
-            <ul class="menu">
-                <router-link class="item" tag="li" v-bind:to="{ name: 'Home' }"><i class="material-icons">home</i><span>{{ $t('titles.home') }}</span></router-link>
-                <router-link class="item" tag="li" v-bind:to="{ name: 'Groups' }"><i class="material-icons">people</i><span>{{ $tc('titles.group', 2) }}</span></router-link>
-                <router-link class="item" tag="li" v-bind:to="{ name: 'Teachers' }"><i class="material-icons">school</i><span>{{ $tc('titles.teacher', 2) }}</span></router-link>
-                <li class="item subheader linebreak"></li>
-                <router-link class="item" tag="li" v-on:click.native="changeLanguage" to="#">{{ $t('drawer_footer.change-language') }}</router-link>
-            </ul>
-        </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -179,7 +97,21 @@ export default {
     return {
       token: Cookies.get('token'),
       loggedIn: false,
-      items: ['EHI2VSe', 'EHI2VSa', 'EHI3VSta'],
+      email: Cookies.get('email'),
+      items: [
+        {
+          class: 'EHI2VSe',
+          name: 'My schedule'
+        },
+        {
+          class: 'EHI2VSa',
+          name: 'Rutger',
+        },
+        {
+          class: 'EHI3VSta',
+          name: ''
+        }
+      ],
       selectedItem: 'EHI2VSe'
     }
   },

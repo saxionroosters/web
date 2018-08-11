@@ -32,7 +32,7 @@
             </v-flex>
         </v-layout>
         <p v-html="$t('login.register-info-2')"></p>
-        <router-link tag="v-btn" class="btn btn--large btn--flat" v-bind:to="{ name: 'Register' }">{{ $t('login.button-register') }}</router-link>
+        <router-link tag="v-btn" class="btn btn--large white--text saxionroosters" v-bind:to="{ name: 'Register' }">{{ $t('login.button-register') }}</router-link>
     </v-flex>
 </template>
 

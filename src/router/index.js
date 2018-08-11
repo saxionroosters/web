@@ -8,6 +8,7 @@ import Teachers from '@/components/Teachers'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Verify from '@/components/Verify'
+import Settings from '@/components/Settings'
 
 Vue.use(Router)
 
@@ -83,6 +84,11 @@ export default new Router({
 	      path: '/verify/:email',
 	      name: 'Verify2',
 	      component: Verify
+	    },
+			{
+	      path: '/settings',
+	      name: 'Settings',
+	      component: Settings
 	    }
 	  ]
 })

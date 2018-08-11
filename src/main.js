@@ -17,7 +17,8 @@ Vue.use(VueAnalytics, {
 
 const translations = {
   en: {
-  	"schedules": "Schedules",
+		"schedules": "Schedules",
+		"loggedin-as": "Logged in as",
   	titles: {
 			"home": "Home",
 			"teacher": "Teacher | Teachers",
@@ -31,7 +32,8 @@ const translations = {
 			"login": "Sign in",
 			"logout": "Sign out",
 			"register": "Register",
-			"verify": "Verification"
+			"verify": "Verification",
+			"settings": "Settings"
   	},
   	subtitles: {
   	  "choose-academy": "Choose an academy"
@@ -56,7 +58,7 @@ const translations = {
 			"register-benefit-1": "add your own events to your schedule",
 			"register-benefit-2": "sync your events and saved schedules across all your devices",
 			"button-submit": "Submit",
-			"button-register": "Register my account"
+			"button-register": "Register"
 	  },
 	  register: {
 			"email-hint": "Email adress",
@@ -84,7 +86,8 @@ const translations = {
     }
   },
   nl: {
-	  "schedules": "Roosters",
+		"schedules": "Roosters",
+		"loggedin-as": "Ingelogd als",
 	  titles: {
 	  	"home": "Home",
 			"teacher": "Docent | Docenten",
@@ -98,7 +101,8 @@ const translations = {
 			"login": "Inloggen",
 			"logout": "Uitloggen",
 			"register": "Registreren",
-			"verify": "Verificatie"
+			"verify": "Verificatie",
+			"settings": "Instellingen"
 	  },
 	  subtitles: {
   	  "choose-academy": "Kies een academie"
@@ -123,7 +127,7 @@ const translations = {
 			"register-benefit-1": "voeg je eigen afspraken toe aan je rooster",
 			"register-benefit-2": "synchroniseer je afspraken en opgeslagen roosters met al je apparaten",
 			"button-submit": "Ga verder",
-			"button-register": "Registreer mijn account"
+			"button-register": "Registreren"
 	  },
 	  register: {
 			"email-hint": "Emailadres",

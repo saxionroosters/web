@@ -17,7 +17,9 @@ export default {
     return {
         loader: null,
         loading: false,
+        verified: false,
         email: '',
+        url: '',
         code: ''
     }
   },
@@ -32,6 +34,14 @@ export default {
     } else {
       this.email = this.$route.params.email;
     }
+
+    if (window.location.port != null || window.location.port != undefined) {
+      this.url = window.location.hostname + ":" + window.location.port + window.location.pathname + "/" + this.email + "/";
+    } else {
+      this.url = window.location.hostname + window.location.pathname + "/" + this.email + "/";
+    }
+
+    console.log(window.location.hostname + window.location.pathname);
   },
 
   watch: {
@@ -74,7 +84,29 @@ export default {
             console.log(response);
             if (response.confirmation.id != null) {
               Cookies.set('token', response.confirmation.id);
-              window.location = '/'
+              Cookies.set('email', this.email);
+              this.verified = true;
+              // window.location = '/'
+              var timer = new Promise((resolve, reject) => {
+                  setTimeout(resolve, 5000);  // "resolve" is already a function, no need for another anonymous function here
+              });
+              var uri = "https://roosters.rest.saxion.nl/api/users/authenticate?originUrl=" + this.url;
+              console.log("redirecting to " + uri + "...");
+              window.location = uri;
+              // var params = {};
+              // params.originUrl = "http://saxionroosters.nl/verify/" + this.email + "/"
+              // $.ajax({
+              //   method: 'GET',
+              //   data: params,
+              //   dataType: 'json',
+              //   url: 'https://roosters.rest.saxion.nl/api/users/authenticate',
+              //   error: function (request, status, error) {
+              //     console.log(status + ' | ' + error);
+              //     return;
+              //   }.bind(this)
+              // }).then((res) => {
+              //   console.log(res);
+              // });
             }
             this.loader = null;
             this.loading = false;
