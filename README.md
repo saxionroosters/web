@@ -1,11 +1,10 @@
-![saxionroosters](http://saxionroosters.nl/static/img/saxionroosters-logo-text-2.png)
+![saxionroosters](http://saxionroosters.nl/static/img/saxionroosters-logo-text-v4.png)
 -----
 
 [![Build Status](http://jenkins.perik.me/job/saxionroosters/badge/icon)](http://jenkins.perik.me/job/saxionroosters/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/wesselperik/saxionroosters/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/saxionroosters/web.svg)](https://github.com/saxionroosters/web/issues?q=is%3Aopen+is%3Aissue)
 [![GitHub last commit](https://img.shields.io/github/last-commit/saxionroosters/web.svg)](https://github.com/saxionroosters/web/commits)
-
 
 An alternative website for [roosters.saxion.nl](http://roosters.saxion.nl/), built with [Vue.js](https://vuejs.org/).
 This project is online available at [saxionroosters.nl](http://saxionroosters.nl/).
