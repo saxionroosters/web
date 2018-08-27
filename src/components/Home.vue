@@ -1,4 +1,9 @@
-<template>
+<template> 
+   <v-flex text-xs-center row wrap>
+        <h1 class="title">{{$t('home.coming-soon-title')}}</h1>
+        <p>{{$t('home.coming-soon-message')}}</p>
+    </v-flex>
+<!--
   <div class="container home">
     <h1 class="title"> {{ $t('titles.home') }} </h1>
     <div>
@@ -76,7 +81,7 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -193,7 +198,7 @@ export default {
   }
 }
 </script>
-
+<!--
 <style scoped>
 h1, h2 {
   font-weight: normal;
@@ -268,6 +273,61 @@ td a:hover {
 
 input.search {
   margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 767px) {
+  h1.title {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  h1.title span.subtitle {
+    display: none;
+  }
+
+  .container {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+}
+</style> -->
+<style scoped>
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
+}
+
+.flex {
+  padding: 30px;
+}
+
+.spacer {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+td {
+  font-size: 18px;
+  padding: 0px;
+}
+
+td a {
+  color: inherit;
+  display: block;
+  padding: .75rem;
+}
+
+td a:hover {
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 767px) {

@@ -43,7 +43,9 @@ const translations = {
   	  "recent-groups": "Recently viewed groups",
   	  "no-recent-groups": "No recently viewed groups.",
   	  "recent-teachers": "Recently viewed teachers",
-  	  "no-recent-teachers": "No recently viewed teachers."
+			"no-recent-teachers": "No recently viewed teachers.",
+			"coming-soon-title": "Coming soon!",
+			"coming-soon-message": "Soon you will be able to view your schedules here, and sync them between your devices. Hold tight!"
   	},
   	schedule: {
   	  "teachers": "teachers",
@@ -64,8 +66,8 @@ const translations = {
       "button-back-to-app" : "Back to app",
       "title-success" : "Success",
       "message-success" : "You're logged in, get back to the app.",
-      "title-failure" : "Rip, something went wrong...",
-      "message-failure" : "Please try it again.",
+      "title-failure" : "Something went wrong...",
+      "message-failure" : "Please try again.",
     },
 	  register: {
 			"email-hint": "Email adress",
@@ -119,7 +121,9 @@ const translations = {
   	  "recent-groups": "Recent bekeken klassen",
   	  "no-recent-groups": "Geen recent bekeken klassen.",
   	  "recent-teachers": "Recent bekeken docenten",
-  	  "no-recent-teachers": "Geen recent bekeken docenten."
+  	  "no-recent-teachers": "Geen recent bekeken docenten.",
+			"coming-soon-title": "Coming soon!",
+			"coming-soon-message": "Binnenkort kun je hier je roosters bekijken, en deze tussen al je apparaten synchroniseren. Nog even geduld!"
   	},
   	schedule: {
   	  "teachers": "docenten",

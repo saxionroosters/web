@@ -25,13 +25,22 @@ export default {
   },
 
   mounted: function () {
-    if (Cookies.get('token') && Cookies.get('token') != "undefined" && Cookies.get('token') !== undefined) {
-      this.$router.push({ name: 'Home'});
-    }
-
     if (this.$route.params.email === undefined) {
       this.$router.push({ name: 'Login' })
+      console.log("Email undefined or null!");
     } else {
+      // check if access_token is set
+      if (window.location.search && window.location.search.startsWith("?access_token=")) {
+        var accessToken = window.location.search.replace("?access_token=", "");
+        Cookies.set("access_token", accessToken);
+        console.log(accessToken);
+      }
+      
+      // if (Cookies.get('token') && Cookies.get('token') != "undefined" && Cookies.get('token') !== undefined) {
+      //   // this.$router.push({ name: 'Home'});
+      //   console.log("Token undefined or null!");
+      // }
+
       this.email = this.$route.params.email;
     }
 
@@ -47,7 +56,8 @@ export default {
   watch: {
     '$route' (to, from) {
       if (this.$route.params.email === undefined) {
-        this.$router.push({ name: 'Login' })
+        // this.$router.push({ name: 'Login' })
+        console.log("Email undefined or null!");
       } else {
         this.email = this.$route.params.email;
       }
@@ -86,11 +96,8 @@ export default {
               Cookies.set('token', response.confirmation.id);
               Cookies.set('email', this.email);
               this.verified = true;
-              // window.location = '/'
-              var timer = new Promise((resolve, reject) => {
-                  setTimeout(resolve, 5000);  // "resolve" is already a function, no need for another anonymous function here
-              });
-              var uri = "https://roosters.rest.saxion.nl/api/users/authenticate?originUrl=" + this.url;
+              
+              var uri = "https://roosters.rest.saxion.nl/api/users/authenticate?originUrl=" + encodeURIComponent("http://" + this.url);
               console.log("redirecting to " + uri + "...");
               window.location = uri;
               // var params = {};

@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
       <v-toolbar color="saxionroosters" dark extended flat>
-        <router-link tag="v-toolbar-title" v-bind:to="{ name: 'Home' }" class="white--text">Saxion Roosters</router-link>
+        <router-link tag="v-toolbar-title" v-bind:to="{ name: 'Home' }" class="white--text logo"><span>saxion</span>roosters</router-link>
 
         <v-spacer></v-spacer>
 
@@ -199,8 +199,8 @@ export default {
   }
 
   .saxionroosters {
-    background-color: #8BC34A !important;
-    border-color: #8BC34A !important;
+    background-color: #6cb94d !important;
+    border-color: #6cb94d !important;
   }
 
   .footer-color {
@@ -215,11 +215,21 @@ export default {
   .toolbar__title {
     font-family: 'Nunito Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
     font-weight: 600;
-    font-size: 1.6em;
+    font-size: 1.5em;
   }
 
-  .toolbar__title:hover {
+  .toolbar__title.logo {
+    font-family: 'Product Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 2em;
+  }
+
+  .toolbar__title.logo:hover {
     cursor: pointer;
+  }
+
+  .toolbar__title.logo span {
+    font-weight: 800 !important;
   }
 /*
 html, body {
