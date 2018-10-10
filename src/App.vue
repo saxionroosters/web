@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      <v-toolbar color="saxionroosters" dark extended flat>
+      <v-toolbar color="saxionroosters" dark extended flat v-bind:class="{'beta': checkIfBeta()}">
         <router-link tag="v-toolbar-title" v-bind:to="{ name: 'Home' }" class="white--text logo"><span>saxion</span>roosters</router-link>
 
         <v-spacer></v-spacer>
@@ -123,6 +123,14 @@ export default {
     }
   },
   methods: {
+    checkIfBeta: function(){
+      if (window.location.hostname.indexOf("dev") > -1 || window.location.hostname.indexOf("beta") > -1) {
+        console.log("INFO: This is a beta or dev build of saxionroosters.nl")
+        return true;
+      } else {
+        return false;
+      }
+    },
     changeLanguage: function() {
       if (Cookies.get('locale') !== undefined) {
         if (Cookies.get('locale') === "nl") {
@@ -201,6 +209,11 @@ export default {
   .saxionroosters {
     background-color: #6cb94d !important;
     border-color: #6cb94d !important;
+  }
+
+  .saxionroosters.beta {
+    background-color: #d03d31 !important;
+    border-color: #d03d31 !important;
   }
 
   .footer-color {
