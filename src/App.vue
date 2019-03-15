@@ -21,6 +21,10 @@
               <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
                 <v-list-tile-title>{{ $t('titles.apps') }}</v-list-tile-title>
               </router-link>
+
+                <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
+                    <v-list-tile-title v-on:click="logout">{{ $t('titles.logout') }}</v-list-tile-title>
+                </router-link>
             </v-list>
           </v-menu>
       </v-toolbar>
@@ -51,7 +55,7 @@ export default {
     }
   },
   mounted: function () {
-    
+
   },
   methods: {
     checkIfDev: function(){
@@ -73,6 +77,9 @@ export default {
         Cookies.set('locale', 'nl');
       }
       location.reload();
+    },
+    logout: function() {
+        this.$router.push('/logout')
     }
   }
 }

@@ -9,6 +9,7 @@ import Teachers from '@/components/Teachers'
 import AppAuth from '@/components/AppAuth'
 import WebAuth from '@/components/WebAuth'
 import Login from '@/components/Login'
+import Logout from '@/components/Logout'
 
 Vue.use(Router)
 
@@ -42,6 +43,14 @@ let router = new Router({
             name: 'Login',
             component: Login
             ,
+            meta: {
+                requiresAuth: false
+            }
+        },
+        {
+            path: '/logout',
+            name: 'Logout',
+            component: Logout,
             meta: {
                 requiresAuth: false
             }
@@ -150,8 +159,7 @@ router.beforeEach((to, from, next) => {
         } else {
             next()
         }
-    }
-    else {
+    } else {
         // Just skip..
         next()
     }
