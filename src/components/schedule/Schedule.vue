@@ -1,8 +1,20 @@
 <template>
-    <div id="week_holder">
+    <v-container id="week_holder" >
+
+        <v-flex row wrap v-if="this.scheduleWeek == null">
+            <v-flex xs-12 class="text-xs-center">
+                <v-progress-circular
+                        :size="70"
+                        :width="7"
+                        color="primary"
+                        indeterminate
+
+                ></v-progress-circular>
+            </v-flex>
+        </v-flex>
         <!--TODO: make this better -->
-        <ScheduleWeekDay v-bind:day="day" v-for="day in this.scheduleWeek.days"/>
-    </div>
+        <ScheduleWeekDay v-else v-bind:day="day" v-for="day in this.scheduleWeek.days"/>
+    </v-container>
 </template>
 
 <script>
@@ -40,6 +52,5 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
 </style>
