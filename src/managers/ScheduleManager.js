@@ -26,8 +26,9 @@ export default class ScheduleManager {
      *
      * @param scheduleIdentity
      * @param weekOffset Offset of the week, 0 is relative
+     * @param callback(response)
      */
-    getSchedule(scheduleIdentity, weekOffset = 0) {
+    getScheduleWeek(scheduleIdentity, weekOffset = 0, callback) {
 
         let url
         if (scheduleIdentity.isGroup()) {
@@ -38,10 +39,20 @@ export default class ScheduleManager {
             url = this._buildUrl('/teachers/schedule', {teacher: scheduleIdentity.teacherId, week: weekOffset})
         }
 
-
         Axios.get(url)
             .then((response) => {
                 console.log(response)
+                callback(response.data)
+            })
+            .catch((error) => {
+                this._handleGenericError(error)
+            })
+    }
+
+    getTimeTables() {
+        Axios.get(this._buildUrl('/timetables'))
+            .then((response) => {
+                console.log(response.data)
             })
             .catch((error) => {
                 this._handleGenericError(error)

@@ -1,37 +1,21 @@
 <template>
     <v-container style="max-width: 600px;">
+        <h2>{{this.day.date.day}} - {{this.day.date.date}}</h2>
         <v-timeline dense clipped>
-
-            <v-timeline-item
-                    class="mb-3"
-                    color="grey"
-                    icon-color="grey lighten-2"
-                    small>
-                <v-layout justify-space-between>
-                    <v-flex xs7>This order was archived.</v-flex>
-                    <v-flex xs5 text-xs-right>15:26 EDT</v-flex>
-                </v-layout>
-            </v-timeline-item>
-
+            <ScheduleWeekDayItem v-for="item in this.day.entries" v-bind:item="item"/>
         </v-timeline>
     </v-container>
 </template>
 
 <script>
     import ScheduleWeekDayItem from './ScheduleWeekDayItem'
-    import ScheduleManager from '../../../managers/ScheduleManager'
-    import ScheduleIdentity from "../../../models/ScheduleIdentity";
+
 
     export default {
         name: "ScheduleWeekDay",
         components: {ScheduleWeekDayItem},
-        data() {
-            return {
-                schedule: {}
-            }
-        },
+        props: ['day'],
         mounted() {
-            new ScheduleManager().getSchedule(new ScheduleIdentity('EHI2VSB'))
 
         },
         methods: {
