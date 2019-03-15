@@ -7,6 +7,7 @@ import Groups from '@/components/Groups'
 import Teacher from '@/components/Teacher'
 import Teachers from '@/components/Teachers'
 import AppAuth from '@/components/AppAuth'
+import WebAuth from '@/components/WebAuth'
 import Login from '@/components/Login'
 
 Vue.use(Router)
@@ -87,6 +88,11 @@ export default new Router({
       path: '/app-auth',
       name: 'AppAuth',
       component: AppAuth
+    },
+    {
+      path: '/web-auth',
+      name: 'WevAuth',
+      component: WebAuth
     }
   ]
 })
