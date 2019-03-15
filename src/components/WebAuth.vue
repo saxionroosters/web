@@ -9,7 +9,11 @@
             let token = this.$route.query.access_token;
             if (token !== undefined) {
                 // Save token
-                Cookies.set('access_token', token);
+                localStorage.setItem('access_token', token);
+
+                // Redirect to home
+                // TODO: Do this on a fancier way
+                window.location = '/'
             }
             else{
                 // Something went wrong lol
