@@ -35,6 +35,10 @@ p, li, label, footer, .list__tile__title {
     height: 64px !important;
   }
 
+  main .layout {
+    margin-top: 20px;
+  }
+
   .theme-primary {
     background-color: $primary !important;
     border-color: $primary !important;
@@ -54,28 +58,42 @@ p, li, label, footer, .list__tile__title {
     height: 64px !important;
   }
 
-  .toolbar__title {
+  .v-toolbar__title {
     font-family: 'Nunito Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
     font-weight: 600;
     font-size: 1.5em;
+    margin-left: -10px !important;
   }
 
-  .toolbar__title.logo {
+  .v-toolbar__title .logo {
     font-family: 'Product Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
     font-weight: 500;
-    font-size: 2em;
+    font-size: 1.25em;
   }
 
-  .toolbar__title.logo:hover {
+  .v-toolbar__title .logo:hover {
     cursor: pointer;
   }
 
-  .toolbar__title.logo span {
+  .v-toolbar__title .logo span {
     font-weight: 800 !important;
   }
+
+  .toolbar-search {
+    margin: 6px 10px 0px !important;
+    max-width: 450px;
+  }
+
+  @media only screen and (max-width: 959px) {
+    .toolbar-search {
+        max-width: 100%;
+      }
+  }
+
   .footer {
     color: #5c5c5c !important;
   }
+  
   .footer a {
     font-weight: 500;
     text-decoration: none;
