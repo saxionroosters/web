@@ -5,28 +5,6 @@
 
         <v-spacer></v-spacer>
 
-        <router-link tag="v-btn" v-bind:to="{ name: 'Login' }" class="btn--depressed black--text white hidden-sm-and-down" v-if="!loggedIn">
-          {{ $t('titles.login') }}
-        </router-link>
-
-        <v-menu :nudge-width="100" v-if="loggedIn">
-          <v-toolbar-title slot="activator">
-            <span v-if="selectedItem">{{ selectedItem }}</span>
-            <span v-if="!selectedItem">Schedules</span>
-            <v-icon dark>arrow_drop_down</v-icon>
-          </v-toolbar-title>
-
-          <v-list>
-            <router-link @click="selectedItem = item" tag="v-list-tile" v-bind:to="{ name: 'Group', params: { group: item.class }}" v-for="item in items" :key="item.class">
-              <v-list-tile-title v-html="item.class + '<span> - ' + item.name + '</span>'"></v-list-tile-title>
-            </router-link>
-            <v-divider></v-divider>
-            <router-link @click="selectedItem = ''" tag="v-list-tile" v-bind:to="{ name: 'Home' }">
-              <v-list-tile-title style="font-size: 14px; font-weight: 500; color: #989898;">Manage schedules...</v-list-tile-title>
-            </router-link>
-          </v-list>
-        </v-menu>
-
         <v-btn icon style="margin-left: 25px;">
           <v-icon>search</v-icon>
         </v-btn>
@@ -36,37 +14,12 @@
             </v-btn>
 
             <v-list style="min-width: 150px;">
-              <v-list-tile v-if="loggedIn">
-                <v-list-tile-content>
-                  <v-list-tile-sub-title>{{ $t('loggedin-as') }}</v-list-tile-sub-title>
-                  <v-list-tile-title>{{ email }}</v-list-tile-title>
-                </v-list-tile-content>
-
-                <v-list-tile-action>
-                  <router-link tag="v-btn" class="btn--icon" v-bind:to="{ name: 'Settings' }">
-                    <v-icon>settings</v-icon>
-                  </router-link>
-                </v-list-tile-action>
-              </v-list-tile>
-
-              <v-divider style="margin-top: 5px;" v-if="loggedIn"></v-divider>
-
               <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
                 <v-list-tile-title>{{ $t('titles.about') }}</v-list-tile-title>
               </router-link>
 
               <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
                 <v-list-tile-title>{{ $t('titles.apps') }}</v-list-tile-title>
-              </router-link>
-
-              <v-divider></v-divider>
-
-              <router-link tag="v-list-tile" v-if="!loggedIn" v-bind:to="{ name: 'Login' }">
-                <v-list-tile-title>{{ $t('titles.login') }}</v-list-tile-title>
-              </router-link>
-
-              <router-link tag="v-list-tile" v-if="loggedIn" v-on:click.native="logout" to="/">
-                <v-list-tile-title>{{ $t('titles.logout') }}</v-list-tile-title>
               </router-link>
             </v-list>
           </v-menu>
@@ -95,32 +48,10 @@ export default {
   name: 'App',
   data: function() {
     return {
-      token: Cookies.get('token'),
-      loggedIn: false,
-      email: Cookies.get('email'),
-      items: [
-        {
-          class: 'EHI2VSe',
-          name: 'My schedule'
-        },
-        {
-          class: 'EHI2VSa',
-          name: 'Rutger',
-        },
-        {
-          class: 'EHI3VSta',
-          name: ''
-        }
-      ],
-      selectedItem: 'EHI2VSe'
     }
   },
   mounted: function () {
-    if (this.token && this.token != "undefined" && this.token !== undefined) {
-      this.loggedIn = true;
-    } else {
-      this.loggedIn = false;
-    }
+    
   },
   methods: {
     checkIfBeta: function(){
@@ -142,27 +73,6 @@ export default {
         Cookies.set('locale', 'nl');
       }
       location.reload();
-    },
-    logout: function() {
-      console.log("logout...");
-      if (Cookies.get('token') != '' && Cookies.get('token') != "undefined" && Cookies.get('token') !== undefined) {
-        console.log("logging out...");
-        $.ajax({
-            method: 'POST',
-            dataType: 'json',
-            url: 'http://api.saxionroosters.nl/v1/accounts/logout?access_token=' + Cookies.get('token'),
-            error: function (request, status, error) {
-              // somehow the token is invalid, remove the cookie
-              Cookies.set('token', undefined);
-              return;
-            }.bind(this)
-          }).then((response) => {
-            Cookies.set('token', undefined);
-            location.reload();
-          });
-      } else {
-        console.log("token: " + Cookies.get('token'));
-      }
     }
   }
 }

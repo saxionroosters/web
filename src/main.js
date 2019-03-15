@@ -2,8 +2,9 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import Vuetify from 'vuetify'
 import VueAnalytics from 'vue-analytics'
-import App from './App'
+import App from './App.vue'
 import router from './router'
+import './registerServiceWorker'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
@@ -186,7 +187,6 @@ if (Cookies.get('locale') === undefined) {
 	}
 }
 
-// Create VueI18n instance with options
 const i18n = new VueI18n({
   locale: Cookies.get('locale'),
   messages: translations
@@ -194,8 +194,6 @@ const i18n = new VueI18n({
 
 new Vue({
   i18n,
-  el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
-})
+  render: h => h(App)
+}).$mount('#app')
