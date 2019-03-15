@@ -93,7 +93,7 @@ const translations = {
       "change-language": "Nederlands",
       "project-github": "Project on GitHub",
       "contact": "Contact the developer",
-      "copyright": "&copy; 2018 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a>.",
+      "copyright": "&copy; 2019 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a> & <a href='https://github.com/bananapukeh' target='_blank'>Rutger Nijhuis</a>.",
       "license": "Code released under the <a rel='license' href='https://github.com/wesselperik/saxionroosters/blob/master/LICENSE' target='_blank'>MIT</a> license.",
       "disclaimer": "The information on this site is directly fetched from the official <a href='http://api.roosters.saxion.nl/' target='_blank'>Saxion @:schedules API</a>.<br> No rights can be derived from this information."
     }
@@ -171,7 +171,7 @@ const translations = {
 	  	"change-language": "English",
       "project-github": "Project op GitHub",
       "contact": "Contacteer ontwikkelaar",
-      "copyright": "&copy; 2018 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a>.",
+      "copyright": "&copy; 2019 <a href='https://github.com/wesselperik' target='_blank'>Wessel Perik</a> & <a href='https://github.com/bananapukeh' target='_blank'>Rutger Nijhuis</a>.",
       "license": "Code vrijgegeven onder de <a rel='license' href='https://github.com/wesselperik/saxionroosters/blob/master/LICENSE' target='_blank'>MIT</a> licentie.",
       "disclaimer": "De informatie op deze site komt direct vanuit de offici&euml;le <a href='http://api.roosters.saxion.nl/' target='_blank'>Saxion @:schedules API</a>.<br> Er kunnen geen rechten ontleend worden aan deze informatie."
     }

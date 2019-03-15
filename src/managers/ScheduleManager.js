@@ -9,6 +9,12 @@ export default class ScheduleManager {
         this.baseUrl = 'https://roosters.rest.saxion.nl/api'
     }
 
+    // Data
+
+
+
+
+    // API
 
     getGroups() {
         let url = this._buildUrl('/groups')
@@ -21,6 +27,7 @@ export default class ScheduleManager {
             })
 
     }
+
 
     /**
      *
