@@ -7,6 +7,7 @@ import Groups from '@/components/Groups'
 import Teacher from '@/components/Teacher'
 import Teachers from '@/components/Teachers'
 import AppAuth from '@/components/AppAuth'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/group/:group',
