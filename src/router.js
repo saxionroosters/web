@@ -10,6 +10,8 @@ import WebAuth from '@/components/auth/WebAuth'
 import Login from '@/components/auth/Login'
 import Logout from '@/components/auth/Logout'
 import Schedule from '@/components/schedule/Schedule'
+import Search from '@/components/search/Search'
+
 import AuthManager from './managers/AuthManager'
 
 Vue.use(Router)
@@ -49,7 +51,14 @@ let router = new Router({
             meta: {
                 requiresAuth: true
             }
-
+        },
+        {
+            path: '/search',
+            name: 'Search',
+            component: Search,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/group/:group/:week',

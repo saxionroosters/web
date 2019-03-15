@@ -59,6 +59,15 @@ export default class ScheduleManager {
             })
     }
 
+    search(query, callback) {
+        Axios.get(this._buildUrl('/search', {q: query}))
+            .then((response) => {
+                callback(response.data)
+            })
+            .catch((error) => {
+                this._handleGenericError(error)
+            })
+    }
 
     /**
      * Handle generic API errors
