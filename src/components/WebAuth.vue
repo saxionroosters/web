@@ -12,8 +12,7 @@
                 localStorage.setItem('access_token', token);
 
                 // Redirect to home
-                // TODO: Do this on a fancier way
-                window.location = '/'
+                this.$router.push('/')
             }
             else{
                 // Something went wrong lol
