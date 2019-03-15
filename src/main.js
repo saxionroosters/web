@@ -4,6 +4,7 @@ import Vuetify from 'vuetify'
 import VueAnalytics from 'vue-analytics'
 import App from './App.vue'
 import router from './router'
+import axios from 'axios'
 import './registerServiceWorker'
 import 'vuetify/dist/vuetify.min.css'
 
@@ -15,6 +16,8 @@ Vue.use(VueAnalytics, {
 	id: 'UA-118294891-1',
 	router
 });
+
+Vue.prototype.$http = axios;
 
 const translations = {
   en: {
