@@ -21,6 +21,10 @@
               <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
                 <v-list-tile-title>{{ $t('titles.apps') }}</v-list-tile-title>
               </router-link>
+
+                <router-link tag="v-list-tile" v-bind:to="{ name: 'Home' }">
+                    <v-list-tile-title v-on:click="logout">{{ $t('titles.logout') }}</v-list-tile-title>
+                </router-link>
             </v-list>
           </v-menu>
       </v-toolbar>
@@ -51,7 +55,7 @@ export default {
     }
   },
   mounted: function () {
-    
+
   },
   methods: {
     checkIfBeta: function(){
@@ -73,6 +77,9 @@ export default {
         Cookies.set('locale', 'nl');
       }
       location.reload();
+    },
+    logout: function() {
+        this.$router.push('/logout')
     }
   }
 }
@@ -181,10 +188,10 @@ main {
 
 .navbar {
   padding: 0px;
-  background: 
-  linear-gradient( to bottom, 
-  #4caf50 0%, #4caf50 33.3%, 
-  #8bc34a 33.3%, #8bc34a 66.6%, 
+  background:
+  linear-gradient( to bottom,
+  #4caf50 0%, #4caf50 33.3%,
+  #8bc34a 33.3%, #8bc34a 66.6%,
   #cddc39 66.6%, #cddc39) bottom no-repeat;
   background-size: 100%;
 }
@@ -217,7 +224,7 @@ main {
   font-size: 30px;
   padding-bottom: 10px;
   padding-left: 20px;
-  margin-right: 0px; 
+  margin-right: 0px;
   color: #a2a2a2 !important;
 }
 
