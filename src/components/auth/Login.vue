@@ -7,6 +7,8 @@
     </v-flex>
 </template>
 <script>
+    import AuthManager from '../../managers/AuthManager'
+
     export default {
         name: 'Login',
         mounted: () => {

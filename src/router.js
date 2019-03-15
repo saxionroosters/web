@@ -9,6 +9,8 @@ import AppAuth from '@/components/auth/AppAuth'
 import WebAuth from '@/components/auth/WebAuth'
 import Login from '@/components/auth/Login'
 import Logout from '@/components/auth/Logout'
+import Schedule from '@/components/schedule/Schedule'
+import AuthManager from './managers/AuthManager'
 
 Vue.use(Router)
 
@@ -128,6 +130,14 @@ let router = new Router({
             meta: {
                 requiresAuth: false
             }
+        },
+        {
+            path: '/schedule',
+            name: 'Schedule',
+            component: Schedule,
+            meta: {
+                requiresAuth: true
+            }
         }
     ]
 })
@@ -135,8 +145,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        let accessToken = localStorage.getItem('access_token')
-        if (accessToken == null) {
+        if (!AuthManager.isLoggedIn()) {
             next({
                 path: '/login',
                 params: {nextUrl: to.fullPath}

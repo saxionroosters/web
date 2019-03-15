@@ -7,10 +7,12 @@
 </template>
 
 <script>
+    import AuthManager from '../../managers/AuthManager'
     export default {
         name: "Logout",
         mounted() {
-            localStorage.removeItem('access_token')
+            AuthManager.logout()
+
             setTimeout(() => {
                 this.$router.push({ name: 'Login' });
             }, 5000);
