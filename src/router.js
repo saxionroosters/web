@@ -5,10 +5,10 @@ import Group from '@/components/Group'
 import Groups from '@/components/Groups'
 import Teacher from '@/components/Teacher'
 import Teachers from '@/components/Teachers'
-import AppAuth from '@/components/AppAuth'
-import WebAuth from '@/components/WebAuth'
-import Login from '@/components/Login'
-import Logout from '@/components/Logout'
+import AppAuth from '@/components/auth/AppAuth'
+import WebAuth from '@/components/auth/WebAuth'
+import Login from '@/components/auth/Login'
+import Logout from '@/components/auth/Logout'
 
 Vue.use(Router)
 
