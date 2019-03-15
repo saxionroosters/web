@@ -6,8 +6,6 @@
         <v-btn class="primary" large round v-on:click="login">Login</v-btn>
     </v-flex>
 </template>
-
-
 <script>
     export default {
         name: 'Login',
@@ -25,3 +23,6 @@
 
     }
 </script>
+<style lang="scss">
+  /** loaded from sass file **/
+</style>

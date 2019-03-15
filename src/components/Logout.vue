@@ -11,15 +11,13 @@
         name: "Logout",
         mounted() {
             localStorage.removeItem('access_token')
-
             setTimeout(() => {
-                this.$router.push('Login')
-            }, 5000)
-
+                this.$router.push({ name: 'Login' });
+            }, 5000);
         }
     }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+  /** loaded from sass file **/
 </style>
