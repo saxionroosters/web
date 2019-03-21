@@ -72,7 +72,7 @@
                         } else {
                             // Check group codes
                             if (identity.groupId === this.scheduleIdentity.groupId) {
-                                found =  true
+                                found = true
                             }
                         }
                     })
@@ -88,8 +88,6 @@
             buttonUnSave: function () {
                 ScheduleDataManager.removeScheduleIdentity(this.scheduleIdentity)
             },
-
-
             loadSchedule: function () {
                 let groupId = this.$route.query.group
                 let teacherId = this.$route.query.teacher
@@ -98,6 +96,7 @@
                 this.scheduleIdentity = new ScheduleIdentity(groupId, teacherId)
                 if (groupId == null && teacherId == null) {
                     // Fatal error, no schedule id given
+                    console.error('No group or teacher ID given')
                 } else {
                     // Load schedule
                     new ScheduleManager().getScheduleWeek(this.scheduleIdentity, weekOffset, (scheduleWeek) => {

@@ -10,17 +10,21 @@ export default class ScheduleDataManager {
      * @returns {Array<ScheduleIdentity>}
      */
     static getSavedScheduleIdentities() {
-
-        let json = localStorage.getItem(savedSchedulesKey)
-        if (json != null) {
-            let parsedItems = JSON.parse(json)
-            let objectArray = []
-            parsedItems.forEach((obj) => {
-                objectArray.push(ScheduleIdentity.fromJSON(obj))
-            })
-            return objectArray
+        if (this.schedules === undefined) {
+            let json = localStorage.getItem(savedSchedulesKey)
+            if (json != null) {
+                let parsedItems = JSON.parse(json)
+                let objectArray = []
+                parsedItems.forEach((obj) => {
+                    objectArray.push(ScheduleIdentity.fromJSON(obj))
+                })
+                this.schedules = objectArray
+            } else {
+                this.schedules = []
+            }
+        } else {
+            return this.schedules
         }
-        return []
     }
 
     /**
