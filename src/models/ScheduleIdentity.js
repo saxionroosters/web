@@ -11,11 +11,11 @@ export default class ScheduleIdentity {
     }
 
     isGroup() {
-        return this.groupId !== null
+        return this.groupId !== null && this.groupId !== undefined
     }
 
     isTeacher() {
-        return this.teacherId !== null
+        return this.teacherId !== null && this.teacherId !== undefined
     }
 
 
@@ -24,7 +24,7 @@ export default class ScheduleIdentity {
      * @returns string
      */
     getName(){
-        if (this.nickname !== null){
+        if (this.nickname !== null && this.nickname !== undefined){
             return this.nickname
         }
         else if (this.isTeacher()){

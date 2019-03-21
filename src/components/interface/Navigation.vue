@@ -49,6 +49,7 @@
 
             },
             openSchedule: function (sender) {
+                console.log(sender)
                 let query = {}
                 if (sender.isTeacher()) {
                     query["teacher"] = sender.teacherId

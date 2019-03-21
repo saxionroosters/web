@@ -26,14 +26,14 @@
             <v-icon>add</v-icon>
         </v-btn>
         <v-btn v-else
-               @click="buttonUnsave"
+               @click="buttonUnSave"
                color="red"
                dark
                absolute
                bottom
                right
                fab>
-            <v-icon>add</v-icon>
+            <v-icon>trash</v-icon>
         </v-btn>
     </v-container>
 </template>
@@ -55,28 +55,30 @@
         data() {
             return {
                 scheduleWeek: null,
+                scheduleIdentity: null
             }
         },
         computed: {
             isSaved: function () {
                 let identities = ScheduleDataManager.getSavedScheduleIdentities()
+                console.log('dag')
+                let found = false
                 if (this.scheduleIdentity !== null) {
                     identities.forEach((identity) => {
-                        console.log('dag')
                         if (identity.isTeacher()) {
                             // Check teacher codes
                             if (identity.teacherId === this.scheduleIdentity.teacherId) {
-                                return true
+                                found = true
                             }
                         } else {
                             // Check group codes
                             if (identity.groupId === this.scheduleIdentity.groupId) {
-                                return true
+                                found =  true
                             }
                         }
                     })
                 }
-                return false
+                return found
             }
         },
         methods: {
@@ -84,7 +86,7 @@
                 ScheduleDataManager.saveScheduleIdentity(this.scheduleIdentity)
             },
 
-            buttonUnsave: function () {
+            buttonUnSave: function () {
                 ScheduleDataManager.removeScheduleIdentity(this.scheduleIdentity)
             },
 
