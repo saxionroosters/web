@@ -8,14 +8,21 @@
     </v-toolbar-title>
     <v-spacer class="hidden-sm-and-down"></v-spacer>
 
-    <v-text-field
+    <v-autocomplete
       flat
       solo-inverted
+      hide-no-data
+      hide-selected
+      :items="items"
+      :loading="isLoading"
+      :search-input.sync="search"
       prepend-inner-icon="search"
+      color="white"
       label="Search"
       zclass="toolbar-search"
-      v-model="searchQuery"
-    ></v-text-field>
+      v-model="model"
+      return-object
+    ></v-autocomplete>
 
     <v-menu bottom left>
       <v-btn slot="activator" icon>
@@ -41,27 +48,45 @@
   </v-toolbar>
 </template>
 <script>
+import ScheduleManager from "../../managers/ScheduleManager";
+
 export default {
   props: ["drawer"],
-  methods: {
-    search: function(sender) {
-      this.$router.replace({ name: "Search", params: { q: sender } });
-    }
-  },
+  // methods: {
+  //   search: function(sender) {
+  //     this.$router.replace({ name: "Search", params: { q: sender } });
+  //   }
+  // },
   data() {
     return {
-      searchQuery: null
+      model: null,
+      search: null,
+      entries: [],
+      isLoading: false
     };
   },
   mounted() {
     let searchParam = this.$route.query.q;
     if (searchParam != null) {
       this.searchQuery = searchParam;
+    }8
+  },
+  computed: {
+    items () {
+      // TODO fix
+      //return this.entries.groups.map(item => item.name);
     }
   },
   watch: {
-      searchQuery: function(val) {
-          this.$router.replace({ name: "Search", params: { q: val } });
+      search (val) {
+          if (this.isLoading || this.search.length <= 2) return;
+
+          this.isLoading = true;
+
+          new ScheduleManager().search(val, result => {
+            this.entries = result.result;
+            console.log(this.entries);
+          });
       }
   }
 };
