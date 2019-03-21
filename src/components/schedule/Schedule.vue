@@ -61,7 +61,6 @@
         computed: {
             isSaved: function () {
                 let identities = ScheduleDataManager.getSavedScheduleIdentities()
-                console.log('dag')
                 let found = false
                 if (this.scheduleIdentity !== null) {
                     identities.forEach((identity) => {
