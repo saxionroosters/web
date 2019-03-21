@@ -2,7 +2,7 @@
     <div>
         <v-navigation-drawer fixed :clipped="$vuetify.breakpoint.mdAndUp" app v-model="drawer">
         <v-list>
-            <v-list-tile @click="" :key="settings">
+            <v-list-tile @click="">
                 <v-list-tile-action>
                 <v-icon>settings</v-icon>
                 </v-list-tile-action>

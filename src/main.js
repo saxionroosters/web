@@ -8,6 +8,7 @@ import axios from 'axios'
 import './registerServiceWorker'
 import 'vuetify/dist/vuetify.min.css'
 
+
 Vue.config.productionTip = false
 
 Vue.use(VueI18n);

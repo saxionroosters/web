@@ -1,4 +1,5 @@
 <template>
+
     <v-app id="app">
         <Navigation/>
 
@@ -19,6 +20,18 @@
 <script>
     import Navigation from "./components/interface/Navigation.vue";
     import Footer from './components/interface/Footer'
+    import firebase from 'firebase/app'
+
+    // Initialize Firebase
+    let config = {
+        apiKey: "AIzaSyALCynj2Zvwv-NvkGB_MWwhJWYn3CFN3ZQ",
+        authDomain: "saxion-rooster.firebaseapp.com",
+        databaseURL: "https://saxion-rooster.firebaseio.com",
+        projectId: "saxion-rooster",
+        storageBucket: "saxion-rooster.appspot.com",
+        messagingSenderId: "103332887108"
+    };
+    firebase.initializeApp(config);
 
     export default {
         name: "App",
