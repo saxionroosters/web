@@ -11,10 +11,10 @@
                     </v-card>
                 </v-flex>
             </v-layout>
-
-            <Footer/>
         </v-content>
+        <!--<Footer/>-->
     </v-app>
+
 </template>
 
 <script>
