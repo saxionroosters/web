@@ -1,106 +1,121 @@
-p, li, label, footer, .list__tile__title {
-    font-family: 'Nunito Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif !important;
-  }
+p,
+li,
+label,
+footer,
+.list__tile__title {
+  font-family: "Nunito Sans", "Avenir Next", "Avenir", Arial, Helvetica,
+    sans-serif !important;
+}
 
-  footer a, footer button {
-    font-weight: 600 !important;
-  }
+footer a,
+footer button {
+  font-weight: 600 !important;
+}
 
-  h1, h2 {
-    font-family: 'Nunito', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif !important;
-    font-weight: 600;
-  }
+h1,
+h2 {
+  font-family: "Nunito", "Avenir Next", "Avenir", Arial, Helvetica, sans-serif !important;
+  font-weight: 600;
+}
 
-  h1.title {
-    font-weight: 900;
-    font-size: 2.6em !important;
-    margin-bottom: 20px;
-  }
+h1.title {
+  font-weight: 900;
+  font-size: 2.6em !important;
+  margin-bottom: 20px;
+}
 
-  h2 {
-    font-size: 1.8em !important;
-    margin-bottom: 20px;
-  }
+h2 {
+  font-size: 1.8em !important;
+  margin-bottom: 20px;
+}
 
-  nav.toolbar .toolbar-logo {
-    height: 50px;
-    margin-left: 5px;
-  }
+nav.toolbar .toolbar-logo {
+  height: 50px;
+  margin-left: 5px;
+}
 
-  nav.toolbar .toolbar-logo:hover {
-    cursor: pointer;
-  }
+nav.toolbar .toolbar-logo:hover {
+  cursor: pointer;
+}
 
-  nav.toolbar .toolbar__content {
-    height: 64px !important;
-  }
+nav.toolbar .toolbar__content {
+  height: 64px !important;
+}
 
-  main .layout {
-    margin-top: 20px;
-  }
+main .layout {
+  margin-top: 20px;
+}
 
-  .theme-primary {
-    background-color: $primary !important;
-    border-color: $primary !important;
-  }
+.theme-primary {
+  background-color: $primary !important;
+  border-color: $primary !important;
+}
 
-  .theme-primary.dev {
-    background-color: $primary-dev !important;
-    border-color: $primary-dev !important;
-  }
+.theme-primary.dev {
+  background-color: $primary-dev !important;
+  border-color: $primary-dev !important;
+}
 
-  .footer-color {
-    background-color: $light-bg !important;
-    border-color: $light-bg !important;
-  }
+.footer-color {
+  background-color: $light-bg !important;
+  border-color: $light-bg !important;
+}
 
-  .toolbar__content {
-    height: 64px !important;
-  }
+.toolbar__content {
+  height: 64px !important;
+}
 
-  .v-toolbar__title {
-    font-family: 'Nunito Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
-    font-weight: 600;
-    font-size: 1.5em;
-    margin-left: -10px !important;
-  }
+.v-toolbar__title {
+  font-family: "Nunito Sans", "Avenir Next", "Avenir", Arial, Helvetica,
+    sans-serif;
+  font-weight: 600;
+  font-size: 1.5em;
+  margin-left: -10px !important;
+}
 
-  .v-toolbar__title .logo {
-    font-family: 'Product Sans', 'Avenir Next', 'Avenir', Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    font-size: 1.25em;
-  }
+.v-toolbar__title .logo {
+  font-family: "Product Sans", "Avenir Next", "Avenir", Arial, Helvetica,
+    sans-serif;
+  font-weight: 500;
+  font-size: 1.25em;
+}
 
-  .v-toolbar__title .logo:hover {
-    cursor: pointer;
-  }
+.v-toolbar__title .logo:hover {
+  cursor: pointer;
+}
 
-  .v-toolbar__title .logo span {
-    font-weight: 800 !important;
-  }
+.v-toolbar__title .logo span {
+  font-weight: 800 !important;
+}
 
+.toolbar-search {
+  margin: 6px 10px 0px !important;
+  max-width: 450px;
+}
+
+@media only screen and (max-width: 959px) {
   .toolbar-search {
-    margin: 6px 10px 0px !important;
-    max-width: 450px;
+    max-width: 100%;
   }
+}
 
-  @media only screen and (max-width: 959px) {
-    .toolbar-search {
-        max-width: 100%;
-      }
-  }
+.v-footer {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
 
-  .footer {
-    color: #5c5c5c !important;
-  }
-  
-  .footer a {
-    font-weight: 500;
-    text-decoration: none;
-    background-color: transparent;
-    color: #464a4c;
-  }
-  
-  .footer a:hover:not(.btn) {
-    text-decoration: underline;
-  }
+.footer {
+  color: #5c5c5c !important;
+}
+
+.footer a {
+  font-weight: 500;
+  text-decoration: none;
+  background-color: transparent;
+  color: #464a4c;
+}
+
+.footer a:hover:not(.btn) {
+  text-decoration: underline;
+}
